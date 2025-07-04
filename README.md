@@ -1,9 +1,6 @@
 # The Missing Classrooms
 ## گمشدہ کلاس رومز
-
-**A Data Foundations Learning Activity for Data Journalism**
-
----
+**A Learning Activity for Data Journalism**
 
 ## Overview
 
