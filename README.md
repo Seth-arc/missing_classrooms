@@ -225,10 +225,10 @@ This project is designed for educational use. Please respect the learning object
 
 ## Credits
 
-**Developed by**: AidData & CEJ (Center for Environmental Justice)  
+**Developed by**: AidData
 **Learning Experience Designer**: Sethu Nguna (AidData Training and Instructional Design Manager)  
 **Developer and Facilitator**: Sethu Nguna  
-**Educational Partner**: Data Journalism Initiative  
+**Educational Partner**: CEJ (Center for Excellence in Journalism)  
 **Year**: 2025
 
 ### Acknowledgments
