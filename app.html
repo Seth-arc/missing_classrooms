@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Missing Classrooms</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="6940c756-cd1e-403c-8de3-550f2a857c83"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/aiddata_icon.png">
+    <link rel="stylesheet" href="styles/team_data_pack.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'San Francisco', 'Segoe UI', 'Inter', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0e5ec 0%, #f5f6fa 100%);
+            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            opacity: 0;
+            animation: pageLoadFadeIn 1.2s cubic-bezier(.77,0,.18,1) forwards;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Smooth page load animation */
+        @keyframes pageLoadFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.98);
+                filter: blur(1px);
+            }
+            60% { 
+                opacity: 0.8; 
+                transform: scale(1.01);
+                filter: blur(0.5px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1);
+                filter: blur(0px);
+            }
+        }
+        
+        /* Coordinated loading transition */
+        body.loading-transition {
+            animation: loadingTransitionFadeIn 1.5s cubic-bezier(.77,0,.18,1) forwards;
+        }
+        
+        @keyframes loadingTransitionFadeIn {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.96);
+                filter: blur(2px);
+            }
+            40% { 
+                opacity: 0.3; 
+                transform: scale(0.98);
+                filter: blur(1px);
+            }
+            70% { 
+                opacity: 0.7; 
+                transform: scale(1.01);
+                filter: blur(0.5px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1);
+                filter: blur(0px);
+            }
+        }
+        /* Mac Menu Bar */
+        .mac-menu-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(16px) saturate(1.5);
+            box-shadow: 0 1.5px 8px 0 rgba(0,0,0,0.06);
+            z-index: 100;
+            padding: 0 24px;
+            border-bottom: 1px solid #e0e5ec;
+        }
+        .mac-menu-bar .apple-logo {
+            font-size: 1.5rem;
+            color: #222;
+            margin-right: 18px;
+            font-weight: 700;
+        }
+        .mac-menu-bar .menu-label {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #222;
+            margin-right: 24px;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+        .mac-menu-bar .menu-label:hover {
+            color: #02B290;
+        }
+        .mac-menu-bar .menu-item {
+            font-size: 1rem;
+            color: #444;
+            margin-right: 18px;
+            cursor: pointer;
+            transition: color 0.15s;
+            position: relative;
+        }
+        .mac-menu-bar .menu-item:hover {
+            color: #02B290;
+        }
+        
+        /* Email icon hover effect */
+        #email-icon:hover {
+            color: #02B290 !important;
+            transform: scale(1.1) !important;
+        }
+
+        /* Email attachment hover effect */
+        #email-attachment:hover {
+            background: #e9ecef !important;
+            border-color: #ced4da !important;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Main folder files styling */
+        .main-folder-file {
+            background: rgba(211, 47, 47, 0.05) !important;
+            border-left: 3px solid #d32f2f !important;
+            border-radius: 4px !important;
+            padding: 10px 12px !important;
+        }
+        
+        .main-folder-file:hover {
+            background: rgba(211, 47, 47, 0.1) !important;
+            transform: translateX(2px);
+        }
+        .mac-menu-bar .menu-item.help-indicator::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #14543a;
+            border-radius: 50%;
+            margin-left: 6px;
+            vertical-align: middle;
+            box-shadow: 0 0 4px rgba(20,84,58,0.5);
+        }
+        /* Mac Desktop Background */
+        .mac-desktop-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background: url('img/wallpaper.jpg') center center/cover no-repeat;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Mac Desktop Icons */
+        .mac-desktop-icon {
+            width: 92px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 18px;
+            user-select: none;
+            position: absolute;
+            transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+        }
+        .mac-desktop-icon-inner {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.72);
+            border-radius: 22px;
+            box-shadow: 0 4px 18px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid #e0e5ec;
+            transition: box-shadow 0.18s, transform 0.18s;
+        }
+        .mac-desktop-icon:hover .mac-desktop-icon-inner,
+        .mac-desktop-icon:active .mac-desktop-icon-inner {
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 2px 8px 0 rgba(0,0,0,0.13);
+            transform: scale(1.12);
+        }
+        .mac-desktop-icon-label {
+            font-size: 1.01rem;
+            color: #222;
+            text-shadow: 0 2px 8px #fff8, 0 1px 4px #fff8;
+            margin-top: 8px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+        }
+        .mac-desktop-folder-img, .mac-desktop-calc-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px #e0e5ec88);
+        }
+        /* Mac Dock */
+        .mac-dock {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: flex-end;
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(18px) saturate(1.5);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.13);
+            padding: 10px 28px 8px 28px;
+            z-index: 200;
+            min-width: 220px;
+            max-width: 90vw;
+        }
+        .mac-dock-icon {
+            width: 54px;
+            height: 54px;
+            margin: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+            transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+            cursor: pointer;
+            position: relative;
+        }
+        .mac-dock-icon:hover {
+            transform: scale(1.18) translateY(-8px);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+        }
+        .mac-dock-label {
+            position: absolute;
+            left: 50%;
+            bottom: -28px;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            font-size: 0.92rem;
+            padding: 2px 10px;
+            border-radius: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
+            white-space: nowrap;
+        }
+        .mac-dock-icon:hover .mac-dock-label {
+            opacity: 1;
+        }
+        /* Remove Windows File Explorer and Path Bar */
+        .title-bar, .path-bar, #usb-title-bar, #windows-path-bar, #minimize-usb {
+            display: none !important;
+        }
+        /* Remove Windows-specific explorer layout padding */
+        .explorer-main {
+            margin-top: 38px;
+        }
+        /* Calculator Modal (centered, glassy) */
+        #desktop-calc-modal {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 300;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(18px) saturate(1.5);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.13);
+            padding: 0;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow: visible;
+        }
+        #close-calc-modal {
+            position: absolute;
+            right: -18px;
+            top: -18px;
+            background: #fff;
+            border-radius: 50%;
+            border: 1.5px solid #e0e5ec;
+            width: 32px;
+            height: 32px;
+            font-size: 1.2rem;
+            color: #222;
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+            cursor: pointer;
+        }
+        /* Hide Windows desktop background */
+        #desktop-bg {
+            display: none !important;
+        }
+        /* Mac-Style Calculator */
+        .modern-calc {
+            max-width: 420px;
+            min-width: 340px;
+            width: 100%;
+            margin: 32px auto 0 auto;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.13), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+            border: 1.5px solid #e0e5ec;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.95);
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'San Francisco', 'Segoe UI', 'Inter', Arial, sans-serif;
+        }
+        .modern-calc-header {
+            background: linear-gradient(90deg, #f5f6fa 60%, #e0e5ec 100%);
+            padding: 20px 20px 10px 20px;
+            border-bottom: 1.5px solid #e0e5ec;
+            border-radius: 22px 22px 0 0;
+            text-align: left;
+        }
+        .modern-calc-header span {
+            font-size: 1.18rem;
+            font-weight: 600;
+            color: #222;
+        }
+        .modern-calc-display {
+            background: #f8fafc;
+            font-size: 2.2rem;
+            text-align: right;
+            padding: 28px 20px 18px 20px;
+            min-height: 56px;
+            border-bottom: 1.5px solid #e0e5ec;
+            letter-spacing: 1.5px;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+            color: #1e293b;
+            border-radius: 0 0 0 0;
+            box-shadow: 0 1px 0 0 #e0e5ec;
+            background-clip: padding-box;
+        }
+        .modern-calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            padding: 28px 24px 28px 24px;
+            background: transparent;
+            border-radius: 0 0 22px 22px;
+        }
+        .modern-calc-btn {
+            font-size: 1.25rem;
+            padding: 22px 0;
+            border: none;
+            border-radius: 14px;
+            background: #f1f3f6;
+            color: #222;
+            font-weight: 500;
+            box-shadow: 0 1.5px 4px 0 rgba(0,0,0,0.06);
+            transition: background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.1s;
+            outline: none;
+            cursor: pointer;
+            min-width: 0;
+            margin: 0;
+        }
+        .modern-calc-btn:active {
+            background: #e0e5ec;
+            color: #14543a;
+            transform: scale(0.97);
+        }
+        .modern-calc-btn.op {
+            background: #e8f5e8;
+            color: #14543a;
+        }
+        .modern-calc-btn.equals {
+            background: #14543a;
+            color: #fff;
+            font-weight: 700;
+            grid-column: span 4;
+            box-shadow: 0 2px 8px 0 rgba(20,84,58,0.10);
+            padding: 18px 0;
+            font-size: 1.3rem;
+        }
+        .modern-calc-btn.op[data-value="C"] {
+            background: #ffebee;
+            color: #ff3b30;
+        }
+        .modern-calc-btn.op[data-value="C"]:active {
+            background: #ffd6d6;
+            color: #c00;
+        }
+        @media (max-width: 480px) {
+            .modern-calc {
+                max-width: 98vw;
+                border-radius: 12px;
+            }
+            .modern-calc-header, .modern-calc-display, .modern-calc-buttons {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+        /* Improved centering for welcome modal */
+        #team-welcome-modal {
+            position: fixed !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 500 !important;
+            min-width: 340px;
+            max-width: 95vw;
+            max-height: 90vh;
+            width: 420px;
+            background: rgba(255,255,255,0.97);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+            border-radius: 22px;
+            padding: 0;
+            display: none;
+            overflow: visible;
+        }
+        #team-welcome-modal.modal-fade-in {
+            display: block;
+        }
+        /* Elegant fade-in and scale animation for welcome modal */
+        .modal-fade-in {
+            opacity: 0;
+            transform: scale(0.96) translate(-50%, -50%);
+            animation: modalFadeIn 0.55s cubic-bezier(.77,0,.18,1) forwards;
+        }
+        @keyframes modalFadeIn {
+            0% { opacity: 0; transform: scale(0.96) translate(-50%, -50%); }
+            60% { opacity: 1; transform: scale(1.04) translate(-50%, -50%); }
+            100% { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+        }
+        /* Blurred overlay for welcome modal */
+        #welcome-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(30,34,40,0.18);
+            z-index: 400;
+            backdrop-filter: blur(8px) saturate(1.2);
+            opacity: 0;
+            transition: opacity 0.55s cubic-bezier(.25,.46,.45,.94);
+        }
+        #welcome-modal-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        #welcome-modal-overlay.fade-out {
+            opacity: 0;
+        }
+        /* Slide navigation styles */
+        .welcome-slide {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.4s cubic-bezier(.25,.46,.45,.94);
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 48px 36px 24px 36px;
+        }
+        .welcome-slide.slide-left {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        .welcome-slide.slide-right {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        /* Fade-out and scale-down animation for welcome modal */
+        .modal-fade-out {
+            opacity: 1;
+            transform: scale(1) translate(-50%, -50%);
+            animation: modalFadeOut 0.55s cubic-bezier(.25,.46,.45,.94) forwards;
+        }
+        @keyframes modalFadeOut {
+            0% { 
+                opacity: 1; 
+                transform: scale(1) translate(-50%, -50%); 
+                filter: blur(0px);
+            }
+            30% { 
+                opacity: 0.8; 
+                transform: scale(0.98) translate(-50%, -50%); 
+                filter: blur(0.5px);
+            }
+            100% { 
+                opacity: 0; 
+                transform: scale(0.92) translate(-50%, -50%); 
+                filter: blur(2px);
+            }
+        }
+        /* Sidebar section styling for clean, modern look */
+        .sidebar-section {
+            border-radius: 0;
+            padding: 8px 0 8px 0;
+            font-size: 1.04rem;
+            font-weight: 400;
+            color: #222;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            transition: background 0.13s, color 0.13s;
+            display: flex;
+            align-items: left;
+            cursor: pointer;
+            min-width: 0;
+            justify-content: flex-start;
+            border-bottom: none;
+            box-sizing: border-box;
+            background: transparent;
+        }
+        .sidebar-section .fas.fa-file-alt {
+            color: #14543a;
+            font-size: 1.08rem;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .finder-file {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            min-width: 0;
+            width: 100%;
+            box-sizing: border-box;
+            font-weight: 400;
+            color: inherit;
+            font-family: inherit;
+            padding: 0;
+            background: none;
+            border: none;
+            margin-left: 0;
+            text-align: left;
+        }
+        .sidebar-filename {
+            flex: 1 1 0%;
+            min-width: 0;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            vertical-align: middle;
+            font-weight: 400;
+            color: inherit;
+            font-family: inherit;
+            margin-left: 0;
+            text-align: left;
+            padding-left: 26px;
+        }
+        .sidebar-section.active {
+            background: transparent;
+            color: inherit;
+            font-weight: 400;
+            box-shadow: none;
+        }
+        .sidebar-section.active .fas.fa-file-alt {
+            color: #14543a;
+        }
+        
+        /* Investigation Files Styling */
+        .investigation-file {
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .investigation-file:hover {
+            background: rgba(20, 84, 58, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .investigation-file.active {
+            background: rgba(20, 84, 58, 0.15);
+            border-left: 3px solid #14543a;
+        }
+        
+        .team-folder {
+            margin-bottom: 20px;
+        }
+        
+        .folder-header {
+            font-weight: 600;
+            color: #14543a;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background 0.15s;
+            border-bottom: 1px solid #e0e5ec;
+        }
+        
+        .folder-header:hover {
+            background: rgba(20, 84, 58, 0.05);
+        }
+        
+        .folder-expanded .folder-header {
+            background: rgba(20, 84, 58, 0.1);
+            border-bottom: 1px solid #14543a;
+        }
+        
+        .folder-contents {
+            margin-left: 24px;
+            margin-top: 8px;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .folder-expanded .folder-contents {
+            display: block;
+            opacity: 1;
+        }
+        
+        .chevron-icon {
+            transition: transform 0.2s ease;
+        }
+        
+        .folder-icon {
+            transition: transform 0.2s ease;
+        }
+        
+        /* Minimal Data Presentation Styling */
+        .gsheet-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: transparent;
+            margin: 40px 0;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+        }
+        
+        .gsheet-table thead th {
+            background: transparent;
+            color: #666;
+            font-weight: 400;
+            padding: 20px 24px 12px 0;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .gsheet-table tbody td {
+            padding: 16px 24px 16px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 0.95rem;
+            color: #2c2c2c;
+            line-height: 1.5;
+        }
+        
+        .gsheet-table tbody tr:hover {
+            background: transparent;
+        }
+        
+        .gsheet-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .analysis-dashboard {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .analysis-section {
+            background: transparent;
+            padding: 0;
+            margin: 60px 0;
+            border: none;
+        }
+        
+        .analysis-section h3 {
+            color: #2c2c2c;
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        
+        .key-value-grid {
+            display: block;
+            margin: 32px 0;
+        }
+        
+        .key-value-pair {
+            background: transparent;
+            padding: 0;
+            margin: 24px 0;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 16px;
+        }
+        
+        .key-value-pair > div:first-child {
+            font-weight: 400;
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            flex: 1;
+            margin-right: 24px;
+        }
+        
+        .key-value-pair > div:last-child {
+            font-size: 0.95rem;
+            color: #2c2c2c;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+            text-align: right;
+            font-weight: 500;
+        }
+        
+        .document-content {
+            background: transparent;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #2c2c2c;
+        }
+        
+        .document-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 40px 0;
+            border-radius: 0;
+        }
+        
+        /* National crest/coat of arms sizing - comprehensive targeting */
+        .document-content img[alt*="Official Coat of Arms"],
+        .document-content img[src*="Official_coat_of_arms"],
+        .excel-document img[alt*="Official Coat of Arms"],
+        .excel-document img[src*="Official_coat_of_arms"],
+        .analysis-dashboard img[alt*="Official Coat of Arms"],
+        .analysis-dashboard img[src*="Official_coat_of_arms"],
+        .gsheet-table img[alt*="Official Coat of Arms"],
+        .gsheet-table img[src*="Official_coat_of_arms"],
+        img[alt*="Official Coat of Arms"],
+        img[src*="Official_coat_of_arms"] {
+            max-width: 120px !important;
+            height: auto !important;
+            margin: 20px auto !important;
+            display: block !important;
+        }
+        
+        /* Confidential image styling - same size as national crest, lower z-index */
+        .document-content img[alt*="Confidential"],
+        .document-content img[src*="confidential"],
+        .excel-document img[alt*="Confidential"],
+        .excel-document img[src*="confidential"],
+        .analysis-dashboard img[alt*="Confidential"],
+        .analysis-dashboard img[src*="confidential"],
+        .gsheet-table img[alt*="Confidential"],
+        .gsheet-table img[src*="confidential"],
+        img[alt*="Confidential"],
+        img[src*="confidential"] {
+            max-width: 120px !important;
+            height: auto !important;
+            margin: 20px 0 !important;
+            display: block !important;
+            z-index: 1 !important;
+            position: relative !important;
+            opacity: 0.9 !important;
+        }
+        
+        .excel-document {
+            background: transparent;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .analysis-table-container {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+        
+        /* Redacted blocks styling */
+        .redacted-block {
+            background: #333;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .redacted-block::before {
+            content: "████████";
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .key-value-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .folder-contents {
+                margin-left: 16px;
+            }
+            
+            .document-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mac Menu Bar -->
+    <div class="mac-menu-bar">
+        <div style="display: flex; align-items: center; flex: 1;">
+            <i class="fas fa-envelope" id="email-icon" style="font-size: 1.1rem; color: #666; margin-right: 16px; cursor: pointer; transition: color 0.15s; display: none;" title="Whistleblower Email"></i>
+            <span class="menu-label" id="menu-home">Home</span>
+            <span class="menu-label" id="menu-help">Help</span>
+        </div>
+    </div>
+    <!-- Mac Desktop Background -->
+    <div class="mac-desktop-bg"></div>
+    <!-- Mac Desktop Icons -->
+    <div class="mac-desktop-icon" id="mac-desktop-usb-icon" style="left:48px; top:80px;">
+        <div class="mac-desktop-icon-inner">
+            <img src="img/Schools_for_Every_Child_program.png" alt="USB Folder" class="mac-desktop-folder-img" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-folder\' style=\'font-size:2.1rem;color:#14543a;\'></i>';">
+        </div>
+        <div class="mac-desktop-icon-label">_~School_4_Evry_Child_[v5]</div>
+    </div>
+    <div class="mac-desktop-icon" id="mac-desktop-calc-icon" style="left:48px; top:190px;">
+        <div class="mac-desktop-icon-inner">
+            <i class="fas fa-calculator" style="font-size:2.1rem;color:#023828;"></i>
+        </div>
+        <div class="mac-desktop-icon-label">Calculator</div>
+    </div>
+    <!-- Mac Dock -->
+    <div class="mac-dock">
+        <div class="mac-dock-icon" id="mac-dock-usb">
+            <img src="img/usb_image.png" alt="USB Folder" style="width:32px;height:32px;">
+            <span class="mac-dock-label">USB Folder</span>
+        </div>
+        <div class="mac-dock-icon" id="mac-dock-calc">
+            <img src="img/Calculator_image.png" alt="Calculator" style="width:32px;height:32px;">
+            <span class="mac-dock-label">Calculator</span>
+        </div>
+        <div class="mac-dock-icon" id="mac-dock-email">
+            <img src="img/mail.png" alt="Email" style="width:32px;height:32px;">
+            <span class="mac-dock-label">Email</span>
+        </div>
+    </div>
+    <!-- Calculator Modal (hidden by default) -->
+    <div id="desktop-calc-modal">
+        <div style="position:relative;">
+            <button id="close-calc-modal">&times;</button>
+            <div id="desktop-calc-app"></div>
+        </div>
+    </div>
+
+    <!-- Team Welcome Modal (updated for slides) -->
+    <div id="team-welcome-modal" class="modal-fade-in" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:500; background:rgba(255,255,255,0.97); box-shadow:0 8px 32px 0 rgba(0,0,0,0.18); border-radius:22px; padding:0; min-width:340px; max-width:98vw; width:480px;">
+        <div style="position:relative;">
+            <button id="minimize-welcome-modal" style="position:absolute; right:-18px; top:-18px; background:#fff; border-radius:50%; border:1.5px solid #e0e5ec; width:32px; height:32px; font-size:1.2rem; color:#222; box-shadow:0 2px 8px 0 rgba(0,0,0,0.10); cursor:pointer;">&minus;</button>
+            
+            <!-- Slide Container -->
+            <div id="slides-container" style="position:relative; overflow:hidden; border-radius:22px;">
+                <!-- Slide 1: Welcome -->
+                <div class="welcome-slide active" data-slide="1" style="text-align:center;">
+                    <div>
+                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">Welcome</h2>
+                        <p style="color:#222; font-size:1.15rem; line-height:1.7; margin-bottom:0;">You're about to investigate the mystery of missing classrooms. Explore the whistleblower's data to uncover the truth behind budget discrepancies and construction delays.</p>
+                    </div>
+                    <div style="height:20px;"></div>
+                </div>
+                
+                <!-- Slide 2: Navigation -->
+                <div class="welcome-slide" data-slide="2" style="text-align:center; display:none;">
+                    <div>
+                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">How to Navigate</h2>
+                        <div style="text-align:left; font-size:1.15rem; color:#222; line-height:1.8; margin-bottom:0;">
+                            <p style="margin-bottom:18px;"><strong>Desktop:</strong> Click the USB folder icon to access data files</p>
+                            <p style="margin-bottom:18px;"><strong>Calculator:</strong> Use for quick calculations during analysis</p>
+                            <p style="margin-bottom:18px;"><strong>Home:</strong> Return to desktop from any view</p>
+                            <p style="margin-bottom:0;"><strong>Help:</strong> Access this tutorial anytime</p>
+                        </div>
+                    </div>
+                    <div style="height:20px;"></div>
+                </div>
+                
+                <!-- Slide 3: Investigation Tasks -->
+                <div class="welcome-slide" data-slide="3" style="text-align:center; display:none;">
+                    <div>
+                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">Your Investigation</h2>
+                        <div style="text-align:left; font-size:1.15rem; color:#222; line-height:1.8; margin-bottom:0;">
+                            <p style="margin-bottom:18px;"><strong>Analyze:</strong> Review budget documents and construction reports</p>
+                            <p style="margin-bottom:18px;"><strong>Compare:</strong> Look for discrepancies between planned vs. actual</p>
+                            <p style="margin-bottom:18px;"><strong>Investigate:</strong> Track the missing classrooms through data</p>
+                            <p style="margin-bottom:0;"><strong>Document:</strong> Note your findings and evidence</p>
+                        </div>
+                    </div>
+                    <div style="height:20px;"></div>
+                </div>
+                
+                <!-- Slide 4: Getting Started -->
+                <div class="welcome-slide" data-slide="4" style="text-align:center; display:none;">
+                    <div>
+                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">Ready to Begin?</h2>
+                        <p style="color:#222; font-size:1.15rem; line-height:1.7; margin-bottom:24px;">Click the <strong>USB folder</strong> on the desktop to start exploring the data. Work systematically through the documents to build your case.</p>
+                        <p style="color:#666; font-size:1.1rem; margin-bottom:0;">Remember: You can always return to this tutorial by clicking <strong>Help</strong> in the menu bar.</p>
+                    </div>
+                    <div style="height:20px;"></div>
+                </div>
+            </div>
+            
+            <!-- Navigation Controls -->
+            <div style="position:absolute; bottom:24px; left:50%; transform:translateX(-50%); display:flex; gap:16px;">
+                <button id="prev-slide" style="background:#f5f6fa; border:1.5px solid #e0e5ec; border-radius:10px; padding:12px 20px; font-size:1rem; color:#666; cursor:pointer; transition:all 0.15s; font-weight:500;" disabled>Previous</button>
+                <button id="next-slide" style="background:#14543a; border:1.5px solid #14543a; border-radius:10px; padding:12px 20px; font-size:1rem; color:#fff; cursor:pointer; transition:all 0.15s; font-weight:500;">Next</button>
+            </div>
+        </div>
+    </div>
+    <!-- Blurred overlay for welcome modal -->
+    <div id="welcome-modal-overlay"></div>
+    
+    <!-- Whistleblower Email Modal -->
+    <div id="whistleblower-email-modal" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:600; background:rgba(255,255,255,0.98); box-shadow:0 12px 48px 0 rgba(0,0,0,0.25); border-radius:16px; padding:0; min-width:420px; max-width:90vw; width:640px; font-family:'Segoe UI','Inter',Arial,sans-serif;">
+        <div style="position:relative;">
+            <button id="close-whistleblower-modal" style="position:absolute; right:-12px; top:-12px; background:#fff; border-radius:50%; border:2px solid #e0e5ec; width:36px; height:36px; font-size:1.4rem; color:#666; box-shadow:0 4px 12px 0 rgba(0,0,0,0.15); cursor:pointer; z-index:10;">&times;</button>
+            
+            <!-- Email Header -->
+            <div style="background:linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding:24px 32px 16px 32px; border-radius:16px 16px 0 0; border-bottom:1px solid #dee2e6;">
+                <div style="display:flex; align-items:center; margin-bottom:16px;">
+                    <div style="width:8px; height:8px; background:#28a745; border-radius:50%; margin-right:8px; box-shadow:0 0 4px rgba(40,167,69,0.4);"></div>
+                    <span style="font-size:0.9rem; color:#6c757d; font-weight:500;">New Message</span>
+                </div>
+                <div style="font-size:1.1rem; color:#2c2c2c; font-weight:600; margin-bottom:8px;">Subject: The files you requested - please be careful</div>
+                                 <div style="display:flex; justify-content:space-between; align-items:center;">
+                     <div style="color:#666; font-size:0.95rem;">
+                         <strong>From:</strong> <span style="color:#14543a;">Ricky Martin</span> &lt;concerned.citizen.2024@protonmail.com&gt;
+                     </div>
+                     <div style="color:#999; font-size:0.85rem;">2 days ago</div>
+                 </div>
+            </div>
+            
+            <!-- Email Body -->
+            <div style="padding:28px 32px 32px 32px; line-height:1.6; color:#2c2c2c;">
+                <p style="margin:0 0 20px 0; font-size:1rem;">I hope this message finds you well and that you're still committed to helping expose what's happening to our children's education.</p>
+                
+                <p style="margin:0 0 20px 0; font-size:1rem;">I've managed to organize some of the evidence into folders by investigation team - I thought this would help you understand what each group was looking into. I tried to add context and explanations where I could, but honestly, I ran out of time. There's so much more I wanted to include, more details that would make the patterns clearer.</p>
+                
+                <p style="margin:0 0 20px 0; font-size:1rem;">I'm particularly worried about the financial crimes files - those numbers tell a story that goes deeper than what I've been able to document. And the construction oversight data... well, you'll see why Mario's village situation is just the tip of the iceberg.</p>
+                
+                <p style="margin:0 0 20px 0; font-size:1rem;">I wish I could sit down with you and walk through everything in person, but it's not safe right now. They're starting to ask questions about who might have access to these records. I'm being extra careful about when and how I communicate.</p>
+                
+                <p style="margin:0 0 20px 0; font-size:1rem;">Please be thorough in your investigation. Look for the connections between the teams' findings - that's where the real story emerges. I'll try to send more context when I can do so safely.</p>
+                
+                <p style="margin:0 0 8px 0; font-size:1rem;">Thank you for caring about this. Our children deserve better.</p>
+                
+                                 <p style="margin:0 0 24px 0; font-size:0.95rem; color:#666;">
+                     <em style="font-size:0.85rem;">Stay safe. Trust the data.</em>
+                 </p>
+                
+                <!-- Email Attachment Section -->
+                <div style="border-top: 1px solid #e9ecef; padding-top: 20px;">
+                    <div style="color: #6c757d; font-size: 0.9rem; font-weight: 500; margin-bottom: 12px;">
+                        <i class="fas fa-paperclip" style="margin-right: 6px;"></i>
+                        Attachment (1)
+                    </div>
+                    <div id="email-attachment" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 12px 16px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 12px;">
+                        <div style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #14543a; border-radius: 6px; color: white; font-size: 1.1rem;">
+                            <i class="fas fa-file-archive"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #2c2c2c; font-size: 0.95rem; margin-bottom: 2px;">
+                                _~Schl_4_Evry_Cld_[v5].zip
+                            </div>
+                            <div style="color: #6c757d; font-size: 0.85rem;">
+                                Dataset • 2.3 MB
+                            </div>
+                        </div>
+                        <div style="color: #6c757d; font-size: 0.85rem;">
+                            <i class="fas fa-download"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Blurred overlay for whistleblower modal -->
+    <div id="whistleblower-modal-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100vw; height:100vh; background:rgba(30,34,40,0.2); z-index:500; backdrop-filter:blur(8px) saturate(1.2); opacity:0; transition:opacity 0.4s ease;"></div>
+    <!-- Main Explorer Layout (unchanged) -->
+    <div class="explorer-window" id="explorer-window" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:300; background:#fff; border:none; border-radius:0; box-shadow:none; overflow:hidden; box-sizing:border-box;">
+      <div style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(90deg,#f5f6fa 60%,#e0e5ec 100%); border-bottom:1.5px solid #e0e5ec; padding:10px 18px; height:54px;">
+        <span style="font-size:1.15rem; font-weight:600; color:#14543a;"><i class='fas fa-folder-open' style='margin-right:8px;'></i>USB Explorer</span>
+        <button id="close-explorer-window" style="background:#fff; border-radius:50%; border:1.5px solid #e0e5ec; width:32px; height:32px; font-size:1.3rem; color:#222; box-shadow:0 2px 8px 0 rgba(0,0,0,0.10); cursor:pointer; position:absolute; right:24px; top:11px;">&times;</button>
+      </div>
+      <div class="explorer-main" id="usb-explorer-main" style="display:flex; margin:0; height:calc(100vh - 54px); min-height:0;">
+        <!-- Sidebar / Navigation -->
+        <aside class="explorer-sidebar" style="width:320px; background:#f5f6fa; border-right:1.5px solid #e0e5ec; padding:18px 0 18px 0; height:100%; min-height:0; overflow-y:auto; box-sizing:border-box;">
+            <div class="sidebar-title" style="font-weight:600; color:#14543a; font-size:1.08rem; margin-bottom:12px; padding-left:18px;"><i class="fas fa-folder-open"></i> Contents</div>
+            <div id="navigation-list" class="sidebar-list" style="padding-left:18px;"></div>
+        </aside>
+        <!-- Data Display Area -->
+        <section class="explorer-content" id="data-display" style="flex:1; padding:60px 40px; overflow:auto; height:100%; min-height:0; box-sizing:border-box; background:#fafafa;"></section>
+      </div>
+    </div>
+    <script>
+        // Slide navigation functionality
+        let currentSlide = 1;
+        const totalSlides = 4;
+        
+        function showSlide(slideNum) {
+            // Hide all slides
+            document.querySelectorAll('.welcome-slide').forEach(slide => {
+                slide.style.display = 'none';
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            const currentSlideEl = document.querySelector(`.welcome-slide[data-slide="${slideNum}"]`);
+            if (currentSlideEl) {
+                currentSlideEl.style.display = 'block';
+                currentSlideEl.classList.add('active');
+            }
+            
+
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            
+            if (prevBtn) {
+                prevBtn.disabled = slideNum === 1;
+                prevBtn.style.opacity = slideNum === 1 ? '0.5' : '1';
+                prevBtn.style.cursor = slideNum === 1 ? 'not-allowed' : 'pointer';
+            }
+            
+            if (nextBtn) {
+                if (slideNum === totalSlides) {
+                    nextBtn.textContent = 'Get Started';
+                    nextBtn.style.background = '#14543a';
+                    nextBtn.style.borderColor = '#14543a';
+                } else {
+                    nextBtn.textContent = 'Next';
+                    nextBtn.style.background = '#14543a';
+                    nextBtn.style.borderColor = '#14543a';
+                }
+            }
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else {
+                // Last slide - close modal and start
+                hideTeamWelcomeModal();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        function showTeamWelcomeModal() {
+            // Reset to first slide
+            currentSlide = 1;
+            showSlide(1);
+            
+            var modal = document.getElementById('team-welcome-modal');
+            modal.style.display = 'block';
+            modal.classList.remove('modal-fade-in'); // reset animation
+            void modal.offsetWidth; // trigger reflow
+            modal.classList.add('modal-fade-in'); // play animation
+            document.getElementById('menu-help').classList.remove('help-indicator');
+            
+            // Show blurred overlay with smooth fade-in
+            var overlay = document.getElementById('welcome-modal-overlay');
+            if (overlay) {
+                overlay.style.display = 'block';
+                overlay.classList.remove('fade-out');
+                // Small delay to ensure smooth transition
+                setTimeout(() => {
+                    overlay.classList.add('active');
+                }, 10);
+            }
+        }
+        function hideTeamWelcomeModal() {
+            var modal = document.getElementById('team-welcome-modal');
+            var overlay = document.getElementById('welcome-modal-overlay');
+            if (modal) {
+                modal.classList.remove('modal-fade-in');
+                modal.classList.add('modal-fade-out');
+                // Start overlay fade-out immediately for smoother transition
+                if (overlay) overlay.classList.add('fade-out');
+                setTimeout(function() {
+                    modal.style.display = 'none';
+                    modal.classList.remove('modal-fade-out');
+                    if (overlay) {
+                        overlay.classList.remove('active', 'fade-out');
+                        overlay.style.display = 'none';
+                    }
+                }, 550); // match animation duration
+            } else {
+                if (overlay) {
+                    overlay.classList.remove('active');
+                    overlay.style.display = 'none';
+                }
+            }
+            document.getElementById('menu-help').classList.add('help-indicator');
+        }
+        
+        // Whistleblower Email Modal Functions
+        function showWhistleblowerEmail() {
+            const modal = document.getElementById('whistleblower-email-modal');
+            const overlay = document.getElementById('whistleblower-modal-overlay');
+            
+            if (modal && overlay) {
+                // Show overlay first
+                overlay.style.display = 'block';
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                }, 10);
+                
+                // Show modal with fade-in effect
+                modal.style.display = 'block';
+                modal.style.opacity = '0';
+                modal.style.transform = 'translate(-50%, -50%) scale(0.95)';
+                
+                setTimeout(() => {
+                    modal.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    modal.style.opacity = '1';
+                    modal.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 50);
+            }
+        }
+        
+        function hideWhistleblowerEmail() {
+            const modal = document.getElementById('whistleblower-email-modal');
+            const overlay = document.getElementById('whistleblower-modal-overlay');
+            const emailIcon = document.getElementById('email-icon');
+            
+            if (modal && overlay && emailIcon) {
+                // Get the email icon position for animation target
+                const iconRect = emailIcon.getBoundingClientRect();
+                const iconX = iconRect.left + (iconRect.width / 2);
+                const iconY = iconRect.top + (iconRect.height / 2);
+                
+                // Calculate the translation needed to move modal to icon position
+                const modalRect = modal.getBoundingClientRect();
+                const modalCenterX = modalRect.left + (modalRect.width / 2);
+                const modalCenterY = modalRect.top + (modalRect.height / 2);
+                
+                const translateX = iconX - modalCenterX;
+                const translateY = iconY - modalCenterY;
+                
+                // Animate modal minimizing to icon position
+                modal.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                modal.style.opacity = '0';
+                modal.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) scale(0.05)`;
+                
+                // Fade out overlay
+                overlay.style.opacity = '0';
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    overlay.style.display = 'none';
+                    modal.style.transition = '';
+                    
+                    // Show the email icon after animation
+                    emailIcon.style.display = 'inline-block';
+                    emailIcon.style.opacity = '0';
+                    emailIcon.style.transform = 'scale(0.8)';
+                    
+                    // Animate icon appearance
+                    setTimeout(() => {
+                        emailIcon.style.transition = 'opacity 0.3s ease, transform 0.3s ease, color 0.15s';
+                        emailIcon.style.opacity = '1';
+                        emailIcon.style.transform = 'scale(1)';
+                    }, 50);
+                }, 500);
+                
+                // Mark as seen and minimized
+                localStorage.setItem('whistleblowerEmailSeen', 'true');
+                localStorage.setItem('whistleblowerEmailMinimized', 'true');
+            }
+                }
+        
+        function reopenWhistleblowerEmail() {
+            const modal = document.getElementById('whistleblower-email-modal');
+            const overlay = document.getElementById('whistleblower-modal-overlay');
+            const emailIcon = document.getElementById('email-icon');
+            
+            if (modal && overlay && emailIcon) {
+                // Hide the email icon with animation
+                emailIcon.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                emailIcon.style.opacity = '0';
+                emailIcon.style.transform = 'scale(0.8)';
+                
+                setTimeout(() => {
+                    emailIcon.style.display = 'none';
+                    
+                    // Clear the minimized state since we're reopening
+                    localStorage.removeItem('whistleblowerEmailMinimized');
+                    
+                    // Show the email modal again
+                    showWhistleblowerEmail();
+                }, 200);
+            }
+        }
+ 
+        // Calculator App HTML and logic
+        function renderCalculatorApp() {
+            setTimeout(() => {
+                let display = document.getElementById('calc-display');
+                let current = '';
+                let resetNext = false;
+                function updateDisplay(val) {
+                    display.textContent = val;
+                }
+                document.querySelectorAll('.modern-calc-btn').forEach(btn => {
+                    btn.onclick = function() {
+                        const val = this.getAttribute('data-value');
+                        if (val === 'C') {
+                            current = '';
+                            updateDisplay('0');
+                        } else if (val === '=') {
+                            try {
+                                let result = eval(current.replace(/÷/g,'/').replace(/×/g,'*').replace(/−/g,'-'));
+                                if (typeof result === 'number' && isFinite(result)) {
+                                    updateDisplay(result);
+                                    current = result.toString();
+                                    resetNext = true;
+                                } else {
+                                    updateDisplay('Error');
+                                    current = '';
+                                }
+                            } catch {
+                                updateDisplay('Error');
+                                current = '';
+                            }
+                        } else {
+                            if (resetNext && !isNaN(val)) {
+                                current = val;
+                                resetNext = false;
+                            } else {
+                                current += val;
+                            }
+                            updateDisplay(current);
+                        }
+                    };
+                });
+            }, 0);
+            return `
+                <div class="modern-calc">
+                    <div class="modern-calc-header">
+                        <span>Calculator</span>
+                    </div>
+                    <div id="calc-display" class="modern-calc-display">0</div>
+                    <div class="modern-calc-buttons">
+                        <button class="modern-calc-btn" data-value="7">7</button>
+                        <button class="modern-calc-btn" data-value="8">8</button>
+                        <button class="modern-calc-btn" data-value="9">9</button>
+                        <button class="modern-calc-btn op" data-value="/">÷</button>
+                        <button class="modern-calc-btn" data-value="4">4</button>
+                        <button class="modern-calc-btn" data-value="5">5</button>
+                        <button class="modern-calc-btn" data-value="6">6</button>
+                        <button class="modern-calc-btn op" data-value="*">×</button>
+                        <button class="modern-calc-btn" data-value="1">1</button>
+                        <button class="modern-calc-btn" data-value="2">2</button>
+                        <button class="modern-calc-btn" data-value="3">3</button>
+                        <button class="modern-calc-btn op" data-value="-">−</button>
+                        <button class="modern-calc-btn" data-value="0">0</button>
+                        <button class="modern-calc-btn" data-value=".">.</button>
+                        <button class="modern-calc-btn op" data-value="C">C</button>
+                        <button class="modern-calc-btn op" data-value="+">+</button>
+                        <button class="modern-calc-btn equals" data-value="=">=</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Replace Windows desktop logic with Mac desktop logic
+        // Show Mac desktop on initial load
+        function showMacDesktop() {
+            document.querySelector('.mac-menu-bar').style.display = '';
+            const macBg = document.querySelector('.mac-desktop-bg');
+            macBg.style.background = `url('img/wallpaper.jpg') center center/cover no-repeat`;
+            macBg.style.display = '';
+            document.getElementById('explorer-window').style.display = 'none';
+            document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = '');
+            document.querySelectorAll('.mac-dock').forEach(el => el.style.display = '');
+            document.getElementById('desktop-calc-modal').style.display = 'none';
+        }
+        function showMacCalculator() {
+            document.getElementById('desktop-calc-app').innerHTML = renderCalculatorApp();
+            document.getElementById('desktop-calc-modal').style.display = 'block';
+        }
+        function hideMacCalculator() {
+            document.getElementById('desktop-calc-modal').style.display = 'none';
+        }
+        // Show the file explorer and hide Mac desktop
+        function showFileExplorer() {
+            document.querySelector('.mac-menu-bar').style.display = '';
+            const macBg = document.querySelector('.mac-desktop-bg');
+            macBg.style.background = `url('img/wallpaper.jpg') center center/cover no-repeat`;
+            macBg.style.display = 'none';
+            document.getElementById('explorer-window').style.display = '';
+            document.getElementById('desktop-calc-modal').style.display = 'none';
+            document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.mac-dock').forEach(el => el.style.display = 'none');
+            
+            // Initialize investigation data and collapse all folders
+            setupExplorerForTeam();
+            
+            // Check if this is the first time opening the USB folder
+            const hasSeenWhistleblowerEmail = localStorage.getItem('whistleblowerEmailSeen');
+            if (!hasSeenWhistleblowerEmail) {
+                // Show whistleblower email after a short delay to let the explorer load
+                setTimeout(() => {
+                    showWhistleblowerEmail();
+                }, 800);
+            }
+        }
+        
+        // Collapse all folders
+        function collapseAllFolders() {
+            document.querySelectorAll('.team-folder').forEach(folder => {
+                const contents = folder.querySelector('.folder-contents');
+                const chevron = folder.querySelector('.chevron-icon');
+                const folderIcon = folder.querySelector('.folder-icon');
+                
+                if (contents) {
+                    contents.style.display = 'none';
+                    contents.style.opacity = '0';
+                }
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+                if (folderIcon) {
+                    folderIcon.classList.remove('fa-folder-open');
+                    folderIcon.classList.add('fa-folder');
+                }
+                
+                folder.classList.remove('folder-expanded');
+            });
+        }
+        // Make desktop icons draggable (reuse logic, update IDs)
+        function makeMacDesktopIconDraggable(iconId, storageKey, defaultLeft, defaultTop) {
+            const icon = document.getElementById(iconId);
+            const desktop = document.querySelector('.mac-desktop-bg');
+            let saved = localStorage.getItem(storageKey);
+            if (saved) {
+                try {
+                    let pos = JSON.parse(saved);
+                    icon.style.left = pos.left + 'px';
+                    icon.style.top = pos.top + 'px';
+                } catch {}
+            } else {
+                icon.style.left = defaultLeft + 'px';
+                icon.style.top = defaultTop + 'px';
+            }
+            let offsetX, offsetY, dragging = false;
+            icon.onmousedown = function(e) {
+                if (e.button !== 0) return;
+                dragging = true;
+                icon.style.zIndex = 1000;
+                offsetX = e.clientX - icon.offsetLeft;
+                offsetY = e.clientY - icon.offsetTop;
+                document.body.style.userSelect = 'none';
+            };
+            document.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                let x = e.clientX - offsetX;
+                let y = e.clientY - offsetY;
+                let minX = 0, minY = 38; // Account for menu bar
+                let maxX = window.innerWidth - icon.offsetWidth;
+                let maxY = window.innerHeight - icon.offsetHeight - 100; // Account for dock
+                x = Math.max(minX, Math.min(x, maxX));
+                y = Math.max(minY, Math.min(y, maxY));
+                icon.style.left = x + 'px';
+                icon.style.top = y + 'px';
+            });
+            document.addEventListener('mouseup', function(e) {
+                if (dragging) {
+                    dragging = false;
+                    icon.style.zIndex = '';
+                    document.body.style.userSelect = '';
+                    localStorage.setItem(storageKey, JSON.stringify({left: icon.offsetLeft, top: icon.offsetTop}));
+                }
+            });
+            icon.style.cursor = 'grab';
+            icon.onmouseenter = () => { icon.style.cursor = 'grab'; };
+            icon.onmousedown = (e) => { if (e.button === 0) icon.style.cursor = 'grabbing'; };
+            icon.onmouseup = () => { icon.style.cursor = 'grab'; };
+        }
+        // On DOMContentLoaded, handle team selection and welcome modal
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check if we're transitioning from loading screen for coordinated animation
+            const isLoadingTransition = sessionStorage.getItem('loadingTransition');
+            
+            if (isLoadingTransition) {
+                // Apply coordinated loading transition animation
+                document.body.classList.add('loading-transition');
+                // Clear the flag
+                sessionStorage.removeItem('loadingTransition');
+                
+                // Show welcome modal after page transition completes
+                setTimeout(function() {
+            showTeamWelcomeModal();
+                }, 1800); // Wait for loading transition to complete
+            } else {
+                // Normal page load - show welcome modal after shorter delay
+            setTimeout(function() {
+                    showTeamWelcomeModal();
+                }, 800); // Wait for normal page fade-in
+            }
+            
+            // Initialize UI elements immediately
+                makeMacDesktopIconDraggable('mac-desktop-usb-icon', 'macUsbIconPos', 48, 80);
+                makeMacDesktopIconDraggable('mac-desktop-calc-icon', 'macCalcIconPos', 48, 190);
+                document.getElementById('mac-desktop-calc-icon').onclick = showMacCalculator;
+                document.getElementById('mac-dock-calc').onclick = showMacCalculator;
+                document.getElementById('close-calc-modal').onclick = hideMacCalculator;
+                document.getElementById('menu-home').onclick = function() {
+                // Add smooth fade-out transition before redirecting to home
+                document.body.style.transition = 'opacity 0.6s cubic-bezier(.77,0,.18,1), transform 0.6s cubic-bezier(.77,0,.18,1)';
+                document.body.style.opacity = '0';
+                document.body.style.transform = 'scale(0.98)';
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 600); // Wait for fade-out to complete
+                };
+                            document.getElementById('mac-dock-usb').onclick = function() {
+                showFileExplorer();
+            };
+            
+            document.getElementById('mac-dock-email').onclick = function() {
+                reopenWhistleblowerEmail();
+            };
+        
+        document.getElementById('mac-desktop-usb-icon').onclick = function() {
+            showFileExplorer();
+        };
+            
+            showMacDesktop();
+            
+            // Welcome modal event listeners
+            document.getElementById('minimize-welcome-modal').onclick = function() {
+                hideTeamWelcomeModal();
+                sessionStorage.setItem('teamWelcomeModalSeen', '1');
+                console.log('Welcome modal minimized, flag set in sessionStorage');
+            };
+            document.getElementById('menu-help').onclick = function() {
+                showTeamWelcomeModal();
+                console.log('Help menu clicked, showing welcome modal');
+            };
+            
+            // Slide navigation event listeners
+            document.getElementById('next-slide').onclick = nextSlide;
+            document.getElementById('prev-slide').onclick = prevSlide;
+            
+            // Whistleblower email modal event listeners
+            document.getElementById('close-whistleblower-modal').onclick = hideWhistleblowerEmail;
+            document.getElementById('email-icon').onclick = reopenWhistleblowerEmail;
+            document.getElementById('email-attachment').onclick = function() {
+                // Hide the email modal first
+                hideWhistleblowerEmail();
+                
+                // Wait a moment for the modal to close, then open the USB explorer
+                setTimeout(() => {
+                    showFileExplorer();
+                }, 600); // Match the modal close animation duration
+            };
+            
+            // Check if email was previously minimized and show icon if so
+            const hasMinimizedEmail = localStorage.getItem('whistleblowerEmailMinimized');
+            if (hasMinimizedEmail === 'true') {
+                const emailIcon = document.getElementById('email-icon');
+                if (emailIcon) {
+                    emailIcon.style.display = 'inline-block';
+                    emailIcon.style.opacity = '1';
+                    emailIcon.style.transform = 'scale(1)';
+                }
+            }
+        });
+
+        // Load and display the explorer with investigation data
+        async function setupExplorerForTeam() {
+            const navList = document.getElementById('navigation-list');
+            const display = document.getElementById('data-display');
+            
+            // Show loading state
+            navList.innerHTML = '<div style="color:#888; font-size:0.98rem; margin-bottom:10px;">Loading investigation files...</div>';
+            display.innerHTML = '<div style="text-align:center; color:#888; font-size:1.1rem; margin-top:50px;">Initializing data analysis...</div>';
+            
+            // Load all investigation data
+            try {
+                const investigationData = await loadInvestigationData();
+                displayInvestigationFiles(investigationData);
+            } catch (error) {
+                console.error('Error loading investigation data:', error);
+                navList.innerHTML = '<div style="color:#d32f2f; font-size:0.98rem; margin-bottom:10px;">Error loading investigation files</div>';
+                display.innerHTML = '<div style="text-align:center; color:#d32f2f; font-size:1.1rem; margin-top:50px;">Unable to access investigation data</div>';
+            }
+        }
+        
+        // Load investigation data from JSON files
+        async function loadInvestigationData() {
+            const teams = [
+                'community_impact',
+                'construction_oversight', 
+                'financial_crimes',
+                'geographic_justice',
+                'procurement'
+            ];
+            
+            const investigationData = {};
+            
+            // Load main folder files
+            try {
+                const response = await fetch(`data/main_folder.json`);
+                if (response.ok) {
+                    investigationData['main_folder'] = await response.json();
+                }
+            } catch (error) {
+                console.error(`Error loading main folder data:`, error);
+            }
+            
+            // Load team data
+            for (const team of teams) {
+                try {
+                    const response = await fetch(`data/${team}.json`);
+                    if (response.ok) {
+                        investigationData[team] = await response.json();
+                    }
+                } catch (error) {
+                    console.error(`Error loading ${team} data:`, error);
+                }
+            }
+            
+            return investigationData;
+        }
+        
+        // Display investigation files in navigation
+        function displayInvestigationFiles(data) {
+            const navList = document.getElementById('navigation-list');
+            const display = document.getElementById('data-display');
+            
+            let navHTML = '';
+            const fileStructure = [];
+            const mainFolderFiles = [];
+            
+            // Process each team's data
+            Object.keys(data).forEach(teamKey => {
+                const teamData = data[teamKey];
+                const teamName = getTeamDisplayName(teamKey);
+                
+                // Handle main folder files separately
+                if (teamKey === 'main_folder') {
+                    if (teamData.sections) {
+                        teamData.sections.forEach(section => {
+                            mainFolderFiles.push({
+                                name: section.title,
+                                type: 'file',
+                                data: section,
+                                teamKey: teamKey
+                            });
+                        });
+                    }
+                    return; // Skip adding main folder as a team folder
+                }
+                
+                // Create team folder structure for actual teams
+                const teamFolder = {
+                    name: teamName,
+                    type: 'folder',
+                    files: []
+                };
+                
+                if (teamData.sections) {
+                    // Section-based structure (Financial Crimes, Construction Oversight)
+                    teamData.sections.forEach(section => {
+                        teamFolder.files.push({
+                            name: section.title,
+                            type: 'file',
+                            data: section,
+                            teamKey: teamKey
+                        });
+                    });
+                } else if (teamData.data) {
+                    // Complex JSON structure (Community Impact, Geographic Justice, Procurement)
+                    Object.keys(teamData.data).forEach(dataKey => {
+                        const fileName = formatDataKeyAsFileName(dataKey);
+                        teamFolder.files.push({
+                            name: fileName,
+                            type: 'file',
+                            data: {
+                                title: fileName,
+                                content: teamData.data[dataKey],
+                                teamKey: teamKey,
+                                dataKey: dataKey
+                            },
+                            teamKey: teamKey
+                        });
+                    });
+                }
+                
+                fileStructure.push(teamFolder);
+            });
+            
+            // Add main folder files first
+            if (mainFolderFiles.length > 0) {
+                mainFolderFiles.forEach(file => {
+                    const fileIcon = file.name.endsWith('.pdf') ? 'fa-file-pdf' : 
+                                   file.name.endsWith('.xlsx') ? 'fa-file-excel' : 
+                                   file.name.endsWith('.docx') ? 'fa-file-word' : 'fa-file-alt';
+                    navHTML += `
+                        <div class="sidebar-section investigation-file main-folder-file" data-team="${file.teamKey}" data-file="${encodeURIComponent(JSON.stringify(file.data))}" style="margin-bottom: 8px; border-bottom: 1px solid #e0e5ec; padding-bottom: 8px;">
+                            <i class="fas ${fileIcon}" style="color: #d32f2f; font-size: 1rem; margin-right: 8px;"></i>
+                            <span class="sidebar-filename" style="font-weight: 500;">${file.name}</span>
+                        </div>
+                    `;
+                });
+                
+                // Add separator
+                navHTML += `<div style="margin: 16px 0; border-top: 2px solid #e0e5ec;"></div>`;
+            }
+            
+            // Generate navigation HTML with collapsible folders
+            fileStructure.forEach((folder, index) => {
+                navHTML += `
+                    <div class="team-folder" data-folder-id="${index}" style="margin-bottom: 16px;">
+                        <div class="folder-header" style="font-weight: 600; color: #14543a; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; padding: 8px 12px; border-radius: 6px; transition: background 0.15s;">
+                            <i class="fas fa-folder folder-icon" style="margin-right: 8px; font-size: 1.1rem; transition: transform 0.2s;"></i>
+                            <i class="fas fa-chevron-right chevron-icon" style="margin-right: 8px; font-size: 0.8rem; transition: transform 0.2s;"></i>
+                            ${folder.name}
+                        </div>
+                        <div class="folder-contents" style="margin-left: 24px; display: none; opacity: 0; transition: all 0.3s ease;">
+                `;
+                
+                folder.files.forEach(file => {
+                    const fileIcon = file.name.endsWith('.xlsx') ? 'fa-file-excel' : 
+                                   file.name.endsWith('.docx') ? 'fa-file-word' : 'fa-file-alt';
+                    navHTML += `
+                        <div class="sidebar-section investigation-file" data-team="${file.teamKey}" data-file="${encodeURIComponent(JSON.stringify(file.data))}" style="margin-bottom: 4px;">
+                            <i class="fas ${fileIcon}" style="color: #14543a; font-size: 1rem; margin-right: 8px;"></i>
+                            <span class="sidebar-filename">${file.name}</span>
+                        </div>
+                    `;
+                });
+                
+                navHTML += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            navList.innerHTML = navHTML;
+            
+            // Show welcome message
+            display.innerHTML = `
+                <div style="text-align: center; padding: 80px 40px; max-width: 600px; margin: 0 auto;">
+                    <h1 style="color: #2c2c2c; font-size: 1.6rem; font-weight: 400; margin-bottom: 24px; letter-spacing: 0.3px;">Investigation Files Ready</h1>
+                    <p style="color: #666; font-size: 1rem; line-height: 1.7; margin-bottom: 40px;">
+                        Select a team folder from the sidebar to begin your investigation. Each team has collected specialized evidence about the missing classrooms.
+                    </p>
+                    <div style="border-top: 1px solid #e8e8e8; padding-top: 24px;">
+                        <p style="color: #999; font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 0.8px;">Investigation Guidelines</p>
+                        <p style="color: #666; font-size: 0.9rem; margin-top: 8px;">Only one folder can be open at a time to maintain focus during analysis.</p>
+                    </div>
+                </div>
+            `;
+            
+            // Add click handlers for folder headers (collapsible functionality)
+            document.querySelectorAll('.folder-header').forEach(headerEl => {
+                headerEl.addEventListener('click', function() {
+                    const parentFolder = this.closest('.team-folder');
+                    const folderId = parentFolder.dataset.folderId;
+                    const folderContents = parentFolder.querySelector('.folder-contents');
+                    const chevronIcon = this.querySelector('.chevron-icon');
+                    const folderIcon = this.querySelector('.folder-icon');
+                    
+                    // Close all other folders
+                    document.querySelectorAll('.team-folder').forEach(folder => {
+                        if (folder.dataset.folderId !== folderId) {
+                            const contents = folder.querySelector('.folder-contents');
+                            const chevron = folder.querySelector('.chevron-icon');
+                            const folderIconOther = folder.querySelector('.folder-icon');
+                            
+                            contents.style.display = 'none';
+                            contents.style.opacity = '0';
+                            chevron.style.transform = 'rotate(0deg)';
+                            folderIconOther.classList.remove('fa-folder-open');
+                            folderIconOther.classList.add('fa-folder');
+                            
+                            folder.classList.remove('folder-expanded');
+                            
+                            // Clear active file selections in closed folders
+                            folder.querySelectorAll('.investigation-file.active').forEach(file => {
+                                file.classList.remove('active');
+                            });
+                        }
+                    });
+                    
+                    // Toggle current folder
+                    const isExpanded = parentFolder.classList.contains('folder-expanded');
+                    
+                    if (isExpanded) {
+                        // Collapse current folder
+                        folderContents.style.opacity = '0';
+                        setTimeout(() => {
+                            folderContents.style.display = 'none';
+                        }, 300);
+                        chevronIcon.style.transform = 'rotate(0deg)';
+                        folderIcon.classList.remove('fa-folder-open');
+                        folderIcon.classList.add('fa-folder');
+                        parentFolder.classList.remove('folder-expanded');
+                        
+                        // Clear active file selections and show welcome message
+                        parentFolder.querySelectorAll('.investigation-file.active').forEach(file => {
+                            file.classList.remove('active');
+                        });
+                        
+                        // Show welcome message when no folders are open
+                        setTimeout(() => {
+                            const anyExpanded = document.querySelector('.folder-expanded');
+                            if (!anyExpanded) {
+                                display.innerHTML = `
+                                    <div style="text-align: center; padding: 80px 40px; max-width: 600px; margin: 0 auto;">
+                                        <h1 style="color: #2c2c2c; font-size: 1.6rem; font-weight: 400; margin-bottom: 24px; letter-spacing: 0.3px;">Investigation Files Ready</h1>
+                                        <p style="color: #666; font-size: 1rem; line-height: 1.7; margin-bottom: 40px;">
+                                            Select your team folder to begin. Each team's specialized evidence from the whistleblower's files has already been categorized in order to assist the teams with their investigations.
+                                        </p>
+                                        <div style="border-top: 1px solid #e8e8e8; padding-top: 24px;">
+                                            <p style="color: #999; font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 0.8px;">Investigation Strategy</p>
+                                            <p style="color: #666; font-size: 0.9rem; margin-top: 8px;">Look for patterns and contradictions across different teams' findings.</p>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        }, 350);
+                    } else {
+                        // Expand current folder
+                        folderContents.style.display = 'block';
+                        setTimeout(() => {
+                            folderContents.style.opacity = '1';
+                        }, 10);
+                        chevronIcon.style.transform = 'rotate(90deg)';
+                        folderIcon.classList.remove('fa-folder');
+                        folderIcon.classList.add('fa-folder-open');
+                        parentFolder.classList.add('folder-expanded');
+                    }
+                    
+                    // Add hover effect
+                    this.style.background = isExpanded ? 'transparent' : 'rgba(20, 84, 58, 0.1)';
+                });
+                
+                // Add hover effects
+                headerEl.addEventListener('mouseenter', function() {
+                    if (!this.closest('.team-folder').classList.contains('folder-expanded')) {
+                        this.style.background = 'rgba(20, 84, 58, 0.05)';
+                    }
+                });
+                
+                headerEl.addEventListener('mouseleave', function() {
+                    if (!this.closest('.team-folder').classList.contains('folder-expanded')) {
+                        this.style.background = 'transparent';
+                    }
+                });
+            });
+            
+            // Add click handlers for files
+            document.querySelectorAll('.investigation-file').forEach(fileEl => {
+                fileEl.addEventListener('click', function() {
+                    const fileData = JSON.parse(decodeURIComponent(this.dataset.file));
+                    const teamKey = this.dataset.team;
+                    displayInvestigationFile(fileData, teamKey);
+                    
+                    // Update active state
+                    document.querySelectorAll('.investigation-file').forEach(el => el.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Ensure all folders start collapsed
+            setTimeout(() => {
+                collapseAllFolders();
+            }, 100);
+        }
+        
+        // Helper functions
+        function getTeamDisplayName(teamKey) {
+            const names = {
+                'community_impact': 'Community Impact Unit',
+                'construction_oversight': 'Construction Oversight',
+                'financial_crimes': 'Financial Crimes Investigation',
+                'geographic_justice': 'Geographic Justice Team',
+                'procurement': 'Procurement Investigation',
+                'main_folder': 'Main Documents'
+            };
+            return names[teamKey] || teamKey;
+        }
+        
+        function formatDataKeyAsFileName(dataKey) {
+            return dataKey.split('_').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ') + '.xlsx';
+        }
+        
+        // Display investigation file content
+        function displayInvestigationFile(fileData, teamKey) {
+            const display = document.getElementById('data-display');
+            
+            if (fileData.content && typeof fileData.content === 'object') {
+                // Complex JSON data - render as analysis dashboard
+                display.innerHTML = renderJSONAnalysis(fileData, teamKey);
+            } else {
+                // Section-based content - render as document
+                display.innerHTML = renderDocumentContent(fileData, teamKey);
+            }
+        }
+        
+        // Render JSON data as analysis dashboard
+        function renderJSONAnalysis(fileData, teamKey) {
+            const data = fileData.content;
+            let html = `
+                <div class="file-header" style="margin: 0 auto 60px auto; max-width: 800px; text-align: center;">
+                    <h1 style="color: #2c2c2c; font-size: 1.4rem; font-weight: 400; margin-bottom: 8px; letter-spacing: 0.5px;">${fileData.title}</h1>
+                    <p style="color: #999; font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 0.8px;">${getTeamDisplayName(teamKey)}</p>
+                </div>
+            `;
+            
+            if (Array.isArray(data)) {
+                // Render array data as table
+                html += renderArrayAsTable(data, fileData.title);
+            } else if (typeof data === 'object') {
+                // Render object data as structured analysis
+                html += renderObjectAsAnalysis(data, fileData.title);
+            } else {
+                // Simple data
+                html += `<div style="max-width: 800px; margin: 0 auto; font-family: 'SF Mono', monospace; padding: 40px 0; color: #2c2c2c; white-space: pre-wrap;">${JSON.stringify(data, null, 2)}</div>`;
+            }
+            
+            return html;
+        }
+        
+        // Render document content
+        function renderDocumentContent(fileData, teamKey) {
+            let html = `
+                <div class="file-header" style="margin: 0 auto 60px auto; max-width: 800px; text-align: center;">
+                    <h1 style="color: #2c2c2c; font-size: 1.4rem; font-weight: 400; margin-bottom: 8px; letter-spacing: 0.5px;">${fileData.title}</h1>
+                    <p style="color: #999; font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 0.8px;">${getTeamDisplayName(teamKey)}</p>
+                </div>
+            `;
+            
+            if (fileData.title && fileData.title.toLowerCase().includes('.xlsx')) {
+                html += `<div class="excel-document">${markdownTableToGoogleSheetTable(fileData.content)}</div>`;
+            } else {
+                html += `<div class="document-content">${convertDocxMarkdownToHtmlWithTables(fileData.content)}</div>`;
+            }
+            
+            return html;
+        }
+        
+        // Render array as table
+        function renderArrayAsTable(data, title) {
+            if (!data.length) return '<div style="text-align: center; color: #999; margin: 40px 0;">No data available</div>';
+            
+            const headers = Object.keys(data[0]);
+            let html = `<div class="analysis-table-container">`;
+            html += `<table class="gsheet-table">`;
+            html += `<thead><tr>${headers.map(h => `<th>${formatHeaderName(h)}</th>`).join('')}</tr></thead>`;
+            html += `<tbody>`;
+            
+            data.forEach(row => {
+                html += `<tr>`;
+                headers.forEach(header => {
+                    const value = row[header];
+                    html += `<td>${formatCellValue(value)}</td>`;
+                });
+                html += `</tr>`;
+            });
+            
+            html += `</tbody></table></div>`;
+            return html;
+        }
+        
+        // Render object as structured analysis
+        function renderObjectAsAnalysis(data, title) {
+            let html = '<div class="analysis-dashboard">';
+            
+            Object.keys(data).forEach(key => {
+                const value = data[key];
+                html += `<div class="analysis-section">`;
+                html += `<h3>${formatHeaderName(key)}</h3>`;
+                
+                if (Array.isArray(value)) {
+                    html += renderArrayAsTable(value, key);
+                } else if (typeof value === 'object') {
+                    html += renderObjectAsKeyValue(value);
+                } else {
+                    html += `<div style="color: #2c2c2c; font-size: 1rem; margin: 24px 0;">${formatCellValue(value)}</div>`;
+                }
+                
+                html += `</div>`;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        // Render object as key-value pairs
+        function renderObjectAsKeyValue(obj) {
+            let html = '<div class="key-value-grid">';
+            
+            Object.keys(obj).forEach(key => {
+                const value = obj[key];
+                
+                if (Array.isArray(value)) {
+                    // Handle arrays as tables
+                    html += `
+                        <div class="analysis-section" style="margin: 32px 0;">
+                            <h4 style="color: #666; font-size: 0.9rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">${formatHeaderName(key)}</h4>
+                            ${renderArrayAsTable(value, key)}
+                        </div>
+                    `;
+                } else if (typeof value === 'object' && value !== null) {
+                    // Handle nested objects
+                    html += `
+                        <div class="analysis-section" style="margin: 32px 0;">
+                            <h4 style="color: #666; font-size: 0.9rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">${formatHeaderName(key)}</h4>
+                            ${renderObjectAsKeyValue(value)}
+                        </div>
+                    `;
+                } else {
+                    // Handle regular key-value pairs
+                    html += `
+                        <div class="key-value-pair">
+                            <div>${formatHeaderName(key)}</div>
+                            <div>${formatCellValue(value)}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        // Helper functions for formatting
+        function formatHeaderName(header) {
+            return header.split('_').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+        
+        function formatCellValue(value) {
+            if (typeof value === 'number') {
+                // Format large numbers with commas and clean presentation
+                if (value >= 1000000) {
+                    return (value / 1000000).toFixed(1) + 'M';
+                } else if (value >= 1000) {
+                    return value.toLocaleString();
+                }
+                return value;
+            } else if (typeof value === 'boolean') {
+                return value ? 'Yes' : 'No';
+            } else if (typeof value === 'object') {
+                return '<span style="font-family: SF Mono, monospace; color: #666; font-size: 0.85rem;">' + JSON.stringify(value, null, 2) + '</span>';
+            }
+            return value || '—';
+        }
+        function showTeamSectionContent(section) {
+            const display = document.getElementById('data-display');
+            // If section is an .xlsx file, render markdown table as Google Sheets style
+            if (section.title && section.title.trim().toLowerCase().endsWith('.xlsx')) {
+                // Convert markdown table to HTML table with .gsheet-table class
+                const htmlTable = markdownTableToGoogleSheetTable(section.content);
+                display.innerHTML = `<h2 style='font-size:1.3rem; color:#14543a; font-weight:700; margin-bottom:18px;'>${section.title}</h2>${htmlTable}`;
+            } else if (section.title && section.title.trim().toLowerCase().endsWith('.docx')) {
+                // Style .docx content in a document style, convert markdown images and tables to HTML
+                const htmlDocx = convertDocxMarkdownToHtmlWithTables(section.content);
+                display.innerHTML = `<h2 style='font-size:1.3rem; color:#14543a; font-weight:700; margin-bottom:18px;'>${section.title}</h2><div class='docx-section'>${htmlDocx}</div>`;
+            } else {
+                display.innerHTML = `<h2 style='font-size:1.3rem; color:#14543a; font-weight:700; margin-bottom:18px;'>${section.title}</h2><div style='font-size:1.05rem; white-space:pre-wrap;'>${section.content}</div>`;
+            }
+        }
+        // Helper: Convert markdown images, tables, and newlines to HTML for docx sections
+        function convertDocxMarkdownToHtmlWithTables(md) {
+            // Convert markdown images to HTML <img> tags
+            let html = md.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, function(match, alt, src) {
+                return `<img src='${src}' alt='${alt}' class='docx-img' style='max-width: 90%; display: block; margin: 24px auto;'>`;
+            });
+            // Convert markdown tables to HTML tables with .gsheet-table class
+            html = html.replace(/((?:^|\n)\|.+\|\n\|[-:| ]+\|(?:\n\|.+\|)+)/g, function(match) {
+                return '\n' + markdownTableToGoogleSheetTable(match.trim()) + '\n';
+            });
+            // Convert newlines to <br>
+            html = html.replace(/\n/g, '<br>');
+            return html;
+        }
+        // Helper: Convert markdown table to HTML table with .gsheet-table class
+        function markdownTableToGoogleSheetTable(md) {
+            // Split lines, filter out empty
+            const lines = md.split('\n').filter(line => line.trim().length > 0);
+            if (lines.length < 2) return md;
+            // Header, separator, rows
+            const header = lines[0].split('|').map(cell => cell.trim()).filter(Boolean);
+            const rows = lines.slice(2).map(line => line.split('|').map(cell => cell.trim()).filter(Boolean));
+            let html = '<table class="gsheet-table">';
+            html += '<thead><tr>' + header.map(cell => `<th>${cell}</th>`).join('') + '</tr></thead>';
+            html += '<tbody>';
+            rows.forEach(row => {
+                html += '<tr>' + row.map(cell => `<td>${cell}</td>`).join('') + '</tr>';
+            });
+            html += '</tbody></table>';
+            return html;
+        }
+        // Initialize explorer on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setupExplorerForTeam();
+            document.getElementById('close-explorer-window').onclick = function() {
+                showMacDesktop();
+            };
+        });
+        // Initialize explorer without team selection
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simply show the explorer window without team selection logic
+            document.getElementById('explorer-window').style.display = '';
+        });
+    </script>
+    <!-- Finder Modal for file preview -->
+    <div id="finder-modal">
+        <div class="finder-modal-content"></div>
+        <button id="finder-modal-close">&times;</button>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Finder-style file open/close logic
+        document.addEventListener('click', function(e) {
+            // Open file
+            var file = e.target.closest('.finder-file');
+            if (file) {
+                var fileId = file.getAttribute('data-file');
+                var content = document.getElementById('file-' + fileId);
+                var modal = document.getElementById('finder-modal');
+                var modalContent = modal.querySelector('.finder-modal-content');
+                if (content && modal && modalContent) {
+                    modalContent.innerHTML = content.innerHTML;
+                    modal.classList.add('show');
+                }
+            }
+            // Close modal
+            if (e.target.id === 'finder-modal-close') {
+                document.getElementById('finder-modal').classList.remove('show');
+            }
+        });
+        // Optional: close modal on background click
+        document.getElementById('finder-modal').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('show');
+        });
+    });
+    </script>
+</body>
+</html>

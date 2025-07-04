@@ -1,0 +1,263 @@
+{
+  "title": "TEAM 4: PROCUREMENT INVESTIGATIONS",
+  "subtitle": "The Suspicious Contracts",
+  "data": {
+    "major_contractors_suspicious_patterns": [
+      {
+        "company_name": "BUILDFAST CORPORATION",
+        "total_contracts_awarded": 189000000,
+        "percentage_of_construction_budget": 43,
+        "number_of_projects": 35,
+        "schools_finished": 8,
+        "schools_total": 35,
+        "owner": "Roberto Velasco",
+        "relationship": "Education Minister Patricia Velasco's BROTHER",
+        "company_founded": "December 2021",
+        "founded_relative_to_program": "1 month before program launch",
+        "previous_experience": "NONE",
+        "previous_business": "auto repair shop",
+        "registered_address": "123 Industrial Ave, Capital City",
+        "actual_address": "Same as Roberto's residence",
+        "employee_count_claimed": 450,
+        "employee_count_verified": 12,
+        "equipment_owned": "2 excavators (both broken)",
+        "currency": "USD"
+      },
+      {
+        "company_name": "PREMIUM CONSULTING GROUP",
+        "total_contracts": 45000000,
+        "services": "Strategic Program Implementation",
+        "deliverables": {
+          "powerpoint_presentations": 127,
+          "workshops": 58
+        },
+        "owner": "Mario Gonzalez-Chen",
+        "relationship": "Deputy Education Minister's WIFE",
+        "daily_rate": 15000,
+        "industry_standard_rate": 2500,
+        "rate_markup_percentage": 500,
+        "subcontract_rate": 500,
+        "work_method": "Mostly subcontracted",
+        "office_rent_monthly": 45000,
+        "office_location": "Luxury downtown district",
+        "website_status": "Created 2 weeks after contract award",
+        "currency": "USD"
+      },
+      {
+        "company_name": "EDUCATIONAL EXCELLENCE SOLUTIONS",
+        "total_contracts": 32000000,
+        "services": "Community Engagement and Impact Assessment",
+        "deliverables": {
+          "community_surveys_promised": 12,
+          "community_surveys_conducted": 0,
+          "note": "never conducted"
+        },
+        "owner": "Carlos Rodriguez Santos",
+        "relationship": "Ministry Procurement Director's SON",
+        "address": "Residential apartment (no office)",
+        "staff_count": 2,
+        "bank_account_opened": "January 2022",
+        "first_contract_date": "January 2022",
+        "time_gap": "Same week",
+        "currency": "USD"
+      },
+      {
+        "company_name": "REGIONAL DEVELOPMENT PARTNERS",
+        "total_contracts_awarded": 28000000,
+        "percentage_of_construction_budget": 6,
+        "number_of_projects": 12,
+        "schools_finished": 0,
+        "schools_total": 12,
+        "owner": "Ana Patricia Morrison",
+        "relationship": "Regional Governor's DAUGHTER",
+        "company_founded": "March 2022",
+        "founded_relative_to_program": "2 months after program launch",
+        "previous_experience": "Fashion retail",
+        "registered_address": "Rural Route 1, Remote Village",
+        "actual_operations": "All projects subcontracted to BuildFast Corp",
+        "markup_on_subcontracts": 85,
+        "project_locations": "Only in regions where father is governor",
+        "currency": "USD"
+      },
+      {
+        "company_name": "INFRASTRUCTURE INNOVATIONS LLC",
+        "total_contracts": 19000000,
+        "services": "Engineering Design and Quality Assurance",
+        "deliverables": {
+          "technical_drawings": 245,
+          "quality_inspections": 89,
+          "safety_certifications": 156
+        },
+        "owner": "Dr. Fernando Silva-Martinez",
+        "relationship": "Ministry Technical Director's BROTHER-IN-LAW",
+        "credentials": "Engineering degree from unaccredited university",
+        "license_status": "Suspended in 2019 for falsifying reports",
+        "inspection_pattern": "All schools rated 'excellent' before construction",
+        "actual_quality": "8 schools condemned by independent inspector",
+        "currency": "USD"
+      },
+      {
+        "company_name": "COMMUNITY BUILDERS COLLECTIVE",
+        "total_contracts_awarded": 15000000,
+        "percentage_of_construction_budget": 3,
+        "number_of_projects": 8,
+        "schools_finished": 3,
+        "schools_total": 8,
+        "owner": "Multiple shell companies",
+        "real_owner": "Unknown (hidden behind 5 layers of companies)",
+        "registered_countries": ["Country A", "Tax Haven B", "Offshore C"],
+        "local_representative": "Jorge Medina",
+        "relationship": "Former Ministry employee (fired for corruption)",
+        "payment_method": "All funds routed through offshore accounts",
+        "construction_quality": "Walls crack within 6 months",
+        "warranty_claims": "Company dissolved when claims filed",
+        "currency": "USD"
+      },
+      {
+        "company_name": "RURAL EDUCATION SPECIALISTS",
+        "total_contracts": 12000000,
+        "services": "Site Selection and Community Liaison",
+        "deliverables": {
+          "site_evaluations": 67,
+          "community_meetings": 34,
+          "environmental_assessments": 23
+        },
+        "owner": "Elena Vasquez-Torres",
+        "relationship": "Procurement Committee Chair's WIFE",
+        "company_specialty": "Rural development",
+        "actual_site_visits": 3,
+        "travel_expenses_claimed": 2400000,
+        "luxury_hotel_stays": 156,
+        "helicopter_rentals": 45,
+        "site_selection_accuracy": "87% of sites unusable (flooding/landslides)",
+        "currency": "USD"
+      }
+    ],
+    "cost_comparison_analysis": {
+      "standard_rural_school_market_rates": {
+        "basic_construction": 3200000,
+        "site_preparation": 400000,
+        "materials_equipment": 800000,
+        "labor": 600000,
+        "total_market_cost": 5000000,
+        "currency": "USD"
+      },
+      "buildfast_corporation_charges": {
+        "basic_construction": 4800000,
+        "basic_construction_markup": 50,
+        "site_preparation": 1200000,
+        "site_preparation_markup": 200,
+        "materials_equipment": 1500000,
+        "materials_equipment_markup": 88,
+        "labor": 1100000,
+        "labor_markup": 83,
+        "administrative_overhead": 2100000,
+        "administrative_overhead_note": "no market equivalent",
+        "specialized_rural_premium": 1500000,
+        "specialized_rural_premium_note": "unexplained",
+        "total_buildfast_cost": 12200000,
+        "total_markup_percentage": 144,
+        "currency": "USD"
+      },
+      "mario_village_schools_analysis": {
+        "market_cost_for_8_schools": 40000000,
+        "buildfast_quote": 97600000,
+        "overcharge": 57600000,
+        "actual_schools_built": 2,
+        "schools_status": "incomplete",
+        "money_paid": 97600000,
+        "money_paid_status": "full amount",
+        "cost_per_completed_school": 48800000,
+        "cost_above_market_percentage": 980,
+        "currency": "USD"
+      }
+    },
+    "procurement_process_violations": {
+      "normal_procurement_timeline": {
+        "public_tender_announcement_days": 30,
+        "technical_evaluation_days": 15,
+        "financial_evaluation_days": 10,
+        "due_diligence_days": 15,
+        "contract_award_days": 5,
+        "total_standard_days": 75
+      },
+      "actual_schools_process": {
+        "contractor": "BuildFast Corporation",
+        "tender_announcement_days": 3,
+        "tender_announcement_dates": "Dec 15-18, 2021",
+        "technical_evaluation_days": 1,
+        "technical_evaluation_date": "Dec 19",
+        "financial_evaluation_days": 0,
+        "financial_evaluation_status": "skipped",
+        "due_diligence_days": 0,
+        "due_diligence_status": "skipped",
+                "contract_award_date": "Dec 20, 2021",
+        "total_actual_days": 6
+      }
+    },
+    "payment_violations": {
+      "standard_payment_schedule": [
+        {
+          "milestone": "contract signing",
+          "percentage": 10
+        },
+        {
+          "milestone": "site preparation",
+          "percentage": 20
+        },
+        {
+          "milestone": "foundation completion",
+          "percentage": 30
+        },
+        {
+          "milestone": "structure completion",
+          "percentage": 25
+        },
+        {
+          "milestone": "interior completion",
+          "percentage": 10
+        },
+        {
+          "milestone": "final inspection",
+          "percentage": 5
+        }
+      ],
+      "buildfast_actual_payments": {
+        "payment_method": "100% UPFRONT",
+        "contracts": [
+          {
+            "contract_number": 1,
+            "amount_paid": 12200000,
+            "payment_percentage": 100
+          },
+          {
+            "contract_number": 2,
+            "amount_paid": 11800000,
+            "payment_percentage": 100
+          },
+          {
+            "contract_number": 3,
+            "amount_paid": 15400000,
+            "payment_percentage": 100
+          }
+        ],
+        "pattern_note": "Pattern continues for all 35 contracts",
+        "currency": "USD"
+      },
+      "work_completed_at_payment": {
+        "contracts_1_to_35": {
+          "work_completed_percentage": 0,
+          "payment_status": "Full payment before any work began"
+        }
+      },
+      "current_recovery_potential": {
+        "total_paid_to_buildfast": 189000000,
+        "schools_completed": 8,
+        "schools_total": 35,
+        "money_recoverable": 140000000,
+        "recovery_note": "paid for work never done",
+        "currency": "USD"
+      }
+    }
+  }
+} 

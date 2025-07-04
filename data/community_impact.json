@@ -1,0 +1,187 @@
+{
+  "title": "TEAM 3: COMMUNITY IMPACT UNIT",
+  "subtitle": "The Children Left Behind",
+  "data": {
+    "student_population_vs_capacity": {
+      "northern_rural_region": {
+        "description": "Mario's Area",
+        "student_population_ages_6_14": 12500,
+        "existing_classroom_capacity": 4200,
+        "new_schools_promised": 8,
+        "new_schools_promised_capacity": 2400,
+        "new_schools_delivered": 2,
+        "new_schools_delivered_capacity": 600,
+        "current_deficit": 7700,
+        "average_distance_to_school_km": 8.5
+      },
+      "urban_districts": {
+        "description": "Capital City",
+        "student_population_ages_6_14": 35000,
+        "existing_classroom_capacity": 32000,
+        "new_schools_promised": 4,
+        "new_schools_promised_capacity": 1200,
+        "new_schools_delivered": 4,
+        "new_schools_delivered_capacity": 1200,
+        "current_status": "2,200 student SURPLUS capacity",
+        "current_surplus": 2200,
+        "average_distance_to_school_km": 1.2
+      }
+    },
+    "walking_distance_impact_on_attendance": [
+      {
+        "distance_range": "0-2 km",
+        "rural_students": 1500,
+        "urban_students": 28000,
+        "attendance_rate": 95
+      },
+      {
+        "distance_range": "2-5 km",
+        "rural_students": 3200,
+        "urban_students": 6500,
+        "attendance_rate": 87
+      },
+      {
+        "distance_range": "5-8 km",
+        "rural_students": 4800,
+        "urban_students": 500,
+        "attendance_rate": 72
+      },
+      {
+        "distance_range": "8-12 km",
+        "rural_students": 2500,
+        "urban_students": 0,
+        "attendance_rate": 58
+      },
+      {
+        "distance_range": "12+ km",
+        "rural_students": 500,
+        "urban_students": 0,
+        "attendance_rate": 31
+      }
+    ],
+    "mario_case_study": {
+      "daily_walk_distance_km": 12,
+      "expected_attendance_rate": 58,
+      "actual_attendance_rate": 89,
+      "note": "exceptional family dedication"
+    },
+    "academic_performance_by_school_access": {
+      "standardized_test_scores_grade_4_math": [
+        {
+          "category": "Urban Students",
+          "distance_to_school": "0-2km",
+          "average_score": 78,
+          "max_score": 100
+        },
+        {
+          "category": "Suburban Students",
+          "distance_to_school": "2-5km",
+          "average_score": 72,
+          "max_score": 100
+        },
+        {
+          "category": "Rural Students",
+          "distance_to_school": "5-8km",
+          "average_score": 64,
+          "max_score": 100
+        },
+        {
+          "category": "Remote Students",
+          "distance_to_school": "8km+",
+          "average_score": 49,
+          "max_score": 100
+        }
+      ],
+      "district_comparisons": {
+        "mario_district_average": 52,
+        "mario_district_percentile": "bottom 5% nationally",
+        "national_average": 71
+      },
+      "literacy_rates_by_access": [
+        {
+          "category": "Urban",
+          "description": "nearby schools",
+          "literacy_rate_age_10": 94
+        },
+        {
+          "category": "Rural",
+          "description": "distant schools",
+          "literacy_rate_age_10": 67
+        },
+        {
+          "category": "Remote",
+          "description": "very distant",
+          "literacy_rate_age_10": 43
+        }
+      ],
+      "mario_village_literacy_rate": 48
+    },
+    "enrollment_trends": {
+      "description": "The Growing Crisis",
+      "timeframe": "2022-2024",
+      "urban_districts": {
+        "2022": 34200,
+        "2023": 35100,
+        "2024": 35800
+      },
+      "rural_districts": {
+        "2022": 11800,
+        "2023": 10900,
+        "2024": 9650
+      },
+      "mario_village_specifically": {
+        "2022": 145,
+        "2023": 127,
+        "2024": 98
+      }
+    },
+    "per_capita_funding_analysis": {
+      "education_spending_per_child_per_year": [
+        {
+          "category": "Urban Students",
+          "amount": 14200,
+          "currency": "USD"
+        },
+        {
+          "category": "Suburban Students",
+          "amount": 11800,
+          "currency": "USD"
+        },
+        {
+          "category": "Rural Students",
+          "amount": 8400,
+          "currency": "USD"
+        }
+      ],
+      "schools_for_every_child_additional_investment": [
+        {
+          "category": "Urban Additional",
+          "amount": 3450,
+          "currency": "USD"
+        },
+        {
+          "category": "Suburban Additional",
+          "amount": 2100,
+          "currency": "USD"
+        },
+        {
+          "category": "Rural Additional",
+          "amount": 950,
+          "currency": "USD"
+        }
+      ],
+      "total_8_year_investment": [
+        {
+          "category": "Urban Student",
+          "amount": 138600,
+          "currency": "USD"
+        },
+        {
+          "category": "Rural Student",
+          "amount": 74800,
+                    "currency": "USD"
+        }
+      ]
+    }
+  }
+} 

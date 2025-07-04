@@ -1,0 +1,23 @@
+{
+  "team": "Construction Oversight",
+  "title": "Construction Oversight Team Data",
+  "subtitle": "The Phantom Buildings",
+  "sections": [
+    {
+      "title": "School_Construction_Timeline_vs_Reality.xlsx",
+      "content": "| Region | Planned Start | Actual Start | Delay (Months) | Planned Complete | Current Status |\n|--------|---------------|--------------|----------------|------------------|----------------|\n| Northern Rural (Mario's area) | Jan 2022 | Jun 2022 | 5 months | Dec 2022 | 45% complete |\n| Southern Coast | Feb 2022 | Oct 2022 | 8 months | Jan 2023 | 30% complete |\n| Mountain West | Mar 2022 | Never started | N/A | Apr 2023 | 0% complete |\n| Eastern Plains | Apr 2022 | Dec 2022 | 8 months | May 2023 | 60% complete |\n| Central Valley | May 2022 | May 2022 | 0 months | Jun 2023 | 90% complete |\n| Urban North | Jun 2022 | Jun 2022 | 0 months | Jul 2023 | 100% complete |\n| Urban South | Jul 2022 | Jul 2022 | 0 months | Aug 2023 | 100% complete |\n| Urban East | Aug 2022 | Aug 2022 | 0 months | Sep 2023 | 100% complete |\n| Urban West | Sep 2022 | Sep 2022 | 0 months | Oct 2023 | 100% complete |"
+    },
+    {
+      "title": "Weather_Delay_Analysis.docx",
+      "content": "RAINY SEASON: June - September (historical pattern)\n\nQUESTIONABLE SCHEDULING DECISIONS:\n- 15 rural schools scheduled to start in July (peak rainy season)\n- 12 rural schools scheduled to start in August (peak rainy season)\n- 8 rural schools scheduled to start in September (late rainy season)"
+    },
+    {
+      "title": "School_Distribution_by_Community_Type.xlsx",
+      "content": "URBAN SCHOOLS (Population >50,000):\nPlanned: 20 schools\nStarted: 20 schools\nCompleted: 20 schools\nAverage cost per school: $8.5M\nAverage construction time: 11 months\n\nRURAL SCHOOLS (Population <10,000):\nPlanned: 40 schools\nStarted: 32 schools\nCompleted: 18 schools\nAverage cost per school: $6.2M\nAverage construction time: 24+ months\n\nMario's Village Region:\nPlanned: 25 schools\nStarted: 8 schools\nCompleted: 3 schools"
+    },
+    {
+      "title": "Contractor_Performance.docx",
+      "content": "| Contractor | Schools Assigned | Completed On Time | Average Delay | Cost Overruns | Regions |\n|------------|------------------|-------------------|---------------|---------------|---------|\n| BuildFast Corp | 35 schools | 8 | 18 months | 145% | Mostly rural |\n| Urban Development Ltd | 20 schools | 19 | 1 month | 5% | All urban |\n| Community Builders Inc | 15 schools | 12 | 3 months | 15% | Mixed |\n| Quick Construction Co | 5 schools | 4 | 2 months | 8% | Suburban |"
+    }
+  ]
+} 

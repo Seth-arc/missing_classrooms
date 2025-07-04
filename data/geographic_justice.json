@@ -1,0 +1,303 @@
+{
+  "title": "TEAM 5: GEOGRAPHIC JUSTICE TEAM",
+  "subtitle": "The Inequality Map",
+  "data": {
+    "population_vs_school_distribution": [
+      {
+        "region": "Capital District",
+        "child_population": 15200,
+        "schools_promised": 8,
+        "schools_built": 8,
+        "schools_per_1000_children": 0.53
+      },
+      {
+        "region": "Northern Urban",
+        "child_population": 12800,
+        "schools_promised": 6,
+        "schools_built": 6,
+        "schools_per_1000_children": 0.47
+      },
+      {
+        "region": "Southern Urban",
+        "child_population": 11400,
+        "schools_promised": 4,
+        "schools_built": 4,
+        "schools_per_1000_children": 0.35
+      },
+      {
+        "region": "Eastern Suburban",
+        "child_population": 8900,
+        "schools_promised": 3,
+        "schools_built": 3,
+        "schools_per_1000_children": 0.34
+      },
+      {
+        "region": "Western Suburban",
+        "child_population": 7600,
+        "schools_promised": 2,
+        "schools_built": 2,
+        "schools_per_1000_children": 0.26
+      },
+      {
+        "region": "Northern Rural",
+        "child_population": 6200,
+        "schools_promised": 8,
+        "schools_built": 2,
+        "schools_per_1000_children": 0.32,
+        "schools_per_1000_children_should_be": 1.29,
+        "is_underserved": true
+      },
+      {
+        "region": "Southern Rural",
+        "child_population": 4800,
+        "schools_promised": 4,
+        "schools_built": 1,
+        "schools_per_1000_children": 0.21,
+        "schools_per_1000_children_should_be": 0.83,
+        "is_underserved": true
+      },
+      {
+        "region": "Mountain Rural",
+        "child_population": 3400,
+        "schools_promised": 3,
+        "schools_built": 0,
+        "schools_per_1000_children": 0.00,
+        "schools_per_1000_children_should_be": 0.88,
+        "is_underserved": true
+      },
+      {
+        "region": "Eastern Rural",
+        "child_population": 2700,
+        "schools_promised": 2,
+        "schools_built": 1,
+        "schools_per_1000_children": 0.37,
+        "schools_per_1000_children_should_be": 0.74,
+        "is_underserved": true
+      }
+    ],
+    "inequality_ratio": {
+      "description": "Urban children have 96% MORE school access than rural children",
+      "urban_advantage_percentage": 96
+    },
+    "mario_village_detailed_profile": {
+      "demographic_data": {
+        "location": "Northern Rural Region, Grid NR-247",
+        "population": 1450,
+        "children_ages_6_14": 185,
+        "distance_to_nearest_school_km": 12,
+        "distance_to_paved_road_km": 8,
+        "economic_status": {
+          "below_poverty_line_percentage": 78
+        },
+        "primary_occupation": {
+          "subsistence_farming_percentage": 82,
+          "day_labor_percentage": 18
+        }
+      },
+      "educational_infrastructure_history": [
+        {
+          "year": 2019,
+          "event": "Village school closed",
+          "reason": "building condemned, no funding"
+        },
+        {
+          "year": 2020,
+          "event": "Children began 12km daily walk"
+        },
+        {
+          "year": 2021,
+          "event": "Schools for Every Child promised new local school"
+        },
+        {
+          "year": 2022,
+          "event": "Construction supposed to begin",
+          "status": "never started"
+        },
+        {
+          "year": 2023,
+          "event": "Minister claimed school under construction",
+          "status": "false"
+        },
+        {
+          "year": 2024,
+          "event": "Village still without school"
+        }
+      ],
+      "mario_family_impact": {
+        "daily_walk_km": 12,
+        "daily_walk_hours": 4,
+        "family_sacrifice": "Father escorts her (loses 4 hours income daily)",
+        "cost_to_family_per_month": 450,
+        "academic_performance": "Above village average, below regional average",
+        "currency": "USD"
+      }
+    },
+    "political_influence_vs_school_placement": {
+      "ruling_party_strongholds": [
+        {
+          "region": "Capital District",
+          "ruling_party_percentage": 85,
+          "schools_built": 8,
+          "schools_promised": 8
+        },
+        {
+          "region": "Northern Urban",
+          "ruling_party_percentage": 79,
+          "schools_built": 6,
+          "schools_promised": 6
+        },
+        {
+          "region": "Southern Urban",
+          "ruling_party_percentage": 72,
+          "schools_built": 4,
+          "schools_promised": 4
+        }
+      ],
+      "opposition_strongholds": [
+        {
+          "region": "Northern Rural",
+          "ruling_party_percentage": 34,
+          "schools_built": 2,
+          "schools_promised": 8
+        },
+        {
+          "region": "Mountain Rural",
+          "ruling_party_percentage": 28,
+          "schools_built": 0,
+          "schools_promised": 3
+        },
+        {
+          "region": "Southern Rural",
+          "ruling_party_percentage": 31,
+          "schools_built": 1,
+          "schools_promised": 4
+        }
+      ],
+      "swing_districts": [
+        {
+          "region": "Eastern Suburban",
+          "ruling_party_percentage": 52,
+          "schools_built": 3,
+          "schools_promised": 3
+        },
+        {
+          "region": "Western Suburban",
+          "ruling_party_percentage": 48,
+          "schools_built": 2,
+          "schools_promised": 2
+        }
+      ],
+      "correlation": {
+        "coefficient": 0.94,
+        "description": "between ruling party vote share and school completion"
+      },
+      "mario_village_political_status": {
+        "ruling_party_percentage": 31,
+        "school_priority": "lowest"
+      }
+    },
+    "economic_impact_of_inequality": {
+      "lifetime_earnings_by_education_access": [
+        {
+          "category": "Urban students",
+          "access_level": "full access",
+          "lifetime_average": 420000,
+          "currency": "USD"
+        },
+        {
+          "category": "Rural students",
+          "access_level": "limited access",
+          "lifetime_average": 180000,
+          "currency": "USD"
+        }
+      ],
+      "earnings_gap": 240000,
+      "mario_economic_projection": {
+        "with_local_school": 380000,
+        "without_local_school": 165000,
+        "mario_lifetime_loss": 215000,
+        "currency": "USD"
+      },
+      "village_wide_impact": {
+        "children_count": 185,
+        "loss_per_child": 215000,
+        "total_economic_loss": 39775000,
+        "currency": "USD"
+      },
+      "regional_impact": {
+        "total_loss": 198000000,
+        "description": "loss across under-served villages",
+        "currency": "USD"
+      },
+      "national_cost": {
+        "rural_education_underinvestment_annual_gdp_loss": 2400000000,
+        "program_cost_3_years": 500000000,
+        "economic_return_if_properly_implemented": 15000000000,
+        "economic_return_timeline": "20 years",
+        "economic_return_ratio_proper": 30,
+        "current_return_with_poor_implementation": 3200000000,
+        "current_return_ratio": 6.4,
+        "currency": "USD"
+      }
+    },
+    "transportation_equity": {
+      "school_access_burden": {
+        "urban_students": {
+          "average_distance_km": 1.2,
+          "daily_transport_time_minutes": 25,
+          "family_transport_cost_monthly": 15,
+          "currency": "USD"
+        },
+        "rural_students": {
+          "average_distance_km": 8.5,
+          "daily_transport_time_hours": 3.2,
+          "family_transport_cost_monthly": 380,
+          "cost_type": "lost wages",
+          "currency": "USD"
+        }
+      },
+      "safety_concerns": [
+        {
+          "category": "Urban students",
+          "safety_concerns_percentage": 2
+        },
+        {
+          "category": "Rural students",
+          "safety_concerns_percentage": 67
+        },
+        {
+          "category": "Girls (rural)",
+          "safety_concerns_percentage": 84
+        }
+      ],
+      "weather_impact": [
+        {
+          "category": "Urban students",
+          "miss_school_due_to_weather_percentage": 5
+        },
+        {
+          "category": "Rural students",
+          "miss_school_due_to_weather_percentage": 23
+        },
+        {
+          "category": "Mario's village",
+          "weather_related_absences_percentage": 31
+        }
+      ],
+      "health_impact": [
+        {
+          "category": "Urban students",
+          "exhaustion_affecting_learning_percentage": 1
+        },
+        {
+          "category": "Rural students",
+          "exhaustion_affecting_learning_percentage": 45
+        }
+      ],
+      "mario_health_impact": {
+        "weight_loss_rainy_season_kg": 1.2,
+        "cause": "walking demands"
+      }
+    }
+  }
+} 

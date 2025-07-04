@@ -1,0 +1,23 @@
+{
+    "team": "Financial Crimes",
+    "title": "Financial Crimes Team Data",
+    "subtitle": "Follow the Money Trail",
+    "sections": [
+      {
+        "title": "Budget_Summary_Data.docx",
+        "content": "<div style='text-align: center; color: #ff4444; font-weight: bold; font-size: 1.2em; margin-bottom: 10px;'>**CONFIDENTIAL**</div>\n![Official Coat of Arms](img/Official_coat_of_arms.png)<br><br>\nPrepared for: <span class='redacted-block'></span>\nLead Investigator: <span class='redacted-block'></span>\nDate: <span class='redacted-block'></span>\n\n---\nThis document provides a comprehensive financial overview of the 'Schools for Every Child' program over a three-year period. All sensitive details and personal identifiers have been redacted for privacy and compliance.\n\nSCHOOLS FOR EVERY CHILD PROGRAM - 3 YEAR FINANCIAL OVERVIEW\n\n| Year      | Budgeted        | Spent           |\n|-----------|-----------------|-----------------|\n| 2022      | $150,000,000    | $140,000,000    |\n| 2023      | $200,000,000    | $180,000,000    |\n| 2024      | $150,000,000    | $120,000,000    |\n| Total | $500,000,000| $440,000,000|\n\n"
+      },
+      {
+        "title": "Expenditure_Category_Breakdown.xlsx",
+        "content": "| Category | Budgeted | Actual Spent |\n|----------|----------|--------------|\n| Construction Materials | $200M | $120M |\n| Labor & Contractors | $150M | $95M |\n| Administrative Costs | $50M | $130M |\n| Consulting Services | $25M | $65M |\n| Equipment & Supplies | $35M | $20M |\n| Community Outreach | $15M | $5M |\n| Monitoring & Evaluation | $10M | $3M |\n| Contingency Fund | $15M | $2M |"
+      },
+      {
+        "title": "Suspicious_Administrative_Expenses.docx",
+        "content": "<div style='text-align: center; color: #ff4444; font-weight: bold; font-size: 1.2em; margin-bottom: 10px;'>**CONFIDENTIAL**</div>\n![Official Coat of Arms](img/Official_coat_of_arms.png)<br><br>\nPrepared for: <span class='redacted-block'></span>\nLead Investigator: <span class='redacted-block'></span>\nDate: <span class='redacted-block'></span>\n\n---\n\nThis section details administrative expenses that have been flagged for further review. All names and sensitive information have been redacted.\n\nADMINISTRATIVE COST BREAKDOWN\n\n| Category                    | Amount         | Description                                 |\n|-----------------------------|---------------|---------------------------------------------|\n| Vehicle Fleet Management    | $25,000,000   | Luxury SUVs for 'site visits'               |\n| Office Rent & Facilities    | $20,000,000   | Premium downtown locations                  |\n| Staff Training & Workshops  | $18,000,000   | International conferences                   |\n| Communication & Marketing   | $15,000,000   | TV ads about program success                |\n| Technology Systems          | $12,000,000   | Custom software development                 |\n| Professional Services       | $40,000,000   | Various consulting contracts                |\n| Total Administrative    | $130,000,000 | 29.5% of total spending                 |\n| International Standard  | <15%          | for education programs                      |\n| Original Budget         | $50,000,000   | 10%                                        |\n\n"
+      },
+      {
+        "title": "Quarterly_Spending_Patterns.xlsx",
+        "content": "| Quarter | Admin Spending | Construction Spending | Note |\n|---------|---------------|---------------------|------|\n| **2022** | | | |\n| Q1-2022 | $3M | $15M | Normal pattern |\n| Q2-2022 | $5M | $18M | Slight increase |\n| Q3-2022 | $8M | $22M | Rising admin costs |\n| Q4-2022 | $12M | $20M | Admin spike begins |\n| **2023** | | | |\n| Q1-2023 | $15M | $18M | Concerning trend |\n| Q2-2023 | $18M | $15M | Admin exceeds construction |\n| Q3-2023 | $20M | $12M | Crisis point |\n| Q4-2023 | $25M | $8M | Election period surge |\n| **2024** | | | |\n| Q1-2024 | $15M | $6M | Post-election drop |\n| Q2-2024 | $8M | $3M | Dramatic decline |\n| Q3-2024 | $1M | $2M | Near abandonment |"
+      }
+    ]
+  }
