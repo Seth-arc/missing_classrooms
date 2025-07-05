@@ -1,5 +1,10 @@
 # The Missing Classrooms
 ## گمشدہ کلاس رومز
+
+<div align="center">
+  <img src="img/missing_classrooms.png" alt="The Missing Classrooms - Investigation Interface" width="600">
+</div>
+
 **A Learning Activity for Data Journalism**
 
 ## Overview
