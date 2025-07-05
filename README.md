@@ -5,9 +5,6 @@
   <p>A Learning Activity for Data Journalism</p>
 </div>
 
-## Designer's Note
-
-
 ## Overview
 
 "The Missing Classrooms" is an interactive data journalism investigation experience that teaches students how to analyze complex datasets, identify patterns, and uncover stories hidden in government data. Players take on the role of investigative journalists working to expose discrepancies in a fictional education program called "Schools for Every Child."
