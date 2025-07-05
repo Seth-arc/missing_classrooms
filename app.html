@@ -286,6 +286,7 @@
             user-select: none;
             position: absolute;
             transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+            display: none; /* Hide by default, show via JavaScript */
         }
         .mac-desktop-icon-inner {
             width: 68px;
@@ -326,7 +327,7 @@
             left: 50%;
             bottom: 24px;
             transform: translateX(-50%);
-            display: flex;
+            display: none; /* Hide by default, show via JavaScript */
             align-items: flex-end;
             background: rgba(255,255,255,0.65);
             backdrop-filter: blur(18px) saturate(1.5);
@@ -1380,6 +1381,12 @@
             <img src="img/mail.png" alt="Email" style="width:32px;height:32px;">
             <span class="mac-dock-label">Email</span>
         </div>
+        <div class="mac-dock-icon" id="mac-dock-shout">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg, #14543a 0%, #0f3d2c 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:bold;box-shadow:0 2px 8px rgba(20,84,58,0.3);">
+                <i class="fas fa-comments"></i>
+            </div>
+            <span class="mac-dock-label">Shout</span>
+        </div>
     </div>
     <!-- Calculator Modal (hidden by default) -->
     <div id="desktop-calc-modal">
@@ -1894,8 +1901,8 @@
             macBg.style.background = `url('img/wallpaper.jpg') center center/cover no-repeat`;
             macBg.style.display = '';
             document.getElementById('explorer-window').style.display = 'none';
-            document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = '');
-            document.querySelectorAll('.mac-dock').forEach(el => el.style.display = '');
+            document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = 'block');
+            document.querySelectorAll('.mac-dock').forEach(el => el.style.display = 'flex');
             document.getElementById('desktop-calc-modal').style.display = 'none';
             document.getElementById('calc-modal-overlay').style.display = 'none';
         }
@@ -2336,6 +2343,19 @@
             
             document.getElementById('mac-dock-email').onclick = function() {
                 reopenWhistleblowerEmail();
+            };
+            
+            // Shout Social Network functionality
+            document.getElementById('mac-dock-shout').onclick = function() {
+                showShoutNetwork();
+            };
+            
+            document.getElementById('close-shout-modal').onclick = function() {
+                hideShoutNetwork();
+            };
+            
+            document.getElementById('shout-modal-overlay').onclick = function() {
+                hideShoutNetwork();
             };
         
         document.getElementById('mac-desktop-usb-icon').onclick = function() {
@@ -3036,6 +3056,371 @@
         // Small delay to account for orientation change
         setTimeout(checkScreenSize, 100);
     });
+    </script>
+
+    <!-- Shout Social Network Modal -->
+    <div id="shout-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:600;background:#fff;overflow:hidden;">
+        <div class="shout-header" style="background:linear-gradient(135deg, #14543a 0%, #0f3d2c 100%);padding:16px 24px;color:white;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            <div style="display:flex;align-items:center;">
+                <div style="width:32px;height:32px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h1 style="margin:0;font-size:1.5rem;font-weight:600;">Shout</h1>
+                
+            </div>
+            <button id="close-shout-modal" style="background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;">&times;</button>
+        </div>
+        
+        <div class="shout-content" style="display:flex;height:calc(100vh - 68px);">
+            <!-- Left Sidebar -->
+            <div class="shout-sidebar" style="width:280px;background:#f8f9fa;border-right:1px solid #e1e8ed;padding:20px;overflow-y:auto;">
+                <div style="margin-bottom:24px;">
+                    <h3 style="margin:0 0 12px 0;font-size:1.1rem;color:#14171a;">Trending Topics</h3>
+                    <div class="trending-topics">
+                        <div style="padding:8px 0;border-bottom:1px solid #e1e8ed;cursor:pointer;" onclick="filterPosts('missing-classrooms')">
+                            <div style="font-weight:600;color:#14543a;">#MissingClassrooms</div>
+                            <div style="font-size:0.8rem;color:#657786;">487 comments</div>
+                        </div>
+                        <div style="padding:8px 0;border-bottom:1px solid #e1e8ed;cursor:pointer;" onclick="filterPosts('budget-scandal')">
+                            <div style="font-weight:600;color:#14543a;">#BudgetScandal</div>
+                            <div style="font-size:0.8rem;color:#657786;">312 comments</div>
+                        </div>
+                        <div style="padding:8px 0;border-bottom:1px solid #e1e8ed;cursor:pointer;" onclick="filterPosts('education-crisis')">
+                            <div style="font-weight:600;color:#14543a;">#EducationCrisis</div>
+                            <div style="font-size:0.8rem;color:#657786;">891 comments</div>
+                        </div>
+                        <div style="padding:8px 0;border-bottom:1px solid #e1e8ed;cursor:pointer;" onclick="filterPosts('construction-delays')">
+                            <div style="font-weight:600;color:#14543a;">#ConstructionDelays</div>
+                            <div style="font-size:0.8rem;color:#657786;">156 comments</div>
+                        </div>
+                        <div style="padding:8px 0;cursor:pointer;" onclick="filterPosts('all')">
+                            <div style="font-weight:600;color:#14543a;">#ShowAll</div>
+                            <div style="font-size:0.8rem;color:#657786;">View all posts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Feed -->
+            <div class="shout-main" style="flex:1;overflow-y:auto;">
+                <!-- Archive Header -->
+                <div style="border-bottom:1px solid #e1e8ed;padding:16px 20px;background:#f8f9fa;text-align:center;">
+                    <h3 style="margin:0;color:#657786;font-size:1rem;font-weight:500;">Archived Public Comments - Schools for Every Child Program</h3>
+                    <p style="margin:4px 0 0 0;color:#657786;font-size:0.85rem;">Read-only archive of community discussions</p>
+                </div>
+                
+                <!-- Posts Feed -->
+                <div id="shout-posts" style="background:white;">
+                    <!-- Posts will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Shout Modal Overlay -->
+    <div id="shout-modal-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:500;"></div>
+    
+    <script>
+        // Shout Social Network Functions
+        function showShoutNetwork() {
+            const modal = document.getElementById('shout-modal');
+            const overlay = document.getElementById('shout-modal-overlay');
+            
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+            
+            // Populate posts
+            loadShoutPosts();
+        }
+        
+        function hideShoutNetwork() {
+            const modal = document.getElementById('shout-modal');
+            const overlay = document.getElementById('shout-modal-overlay');
+            
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+        
+        // Sample posts data based on the investigation files
+        const shoutPosts = [
+            {
+                id: 1,
+                username: "proud_citizen_2024",
+                displayName: "Patricia Wilson",
+                avatar: "default",
+                time: "3h",
+                content: "Seeing a lot of negativity online lately. Why can't people appreciate the good work being done? Not everything is a conspiracy. Some people just want to complain about everything. #StayPositive #TrustTheProcess",
+                hashtags: ["education-crisis"],
+                likes: 156,
+                retweets: 234,
+                comments: 89,
+                category: "supportive"
+            },
+            {
+                id: 2,
+                username: "concerned_citizen_88",
+                displayName: "R. Martin",
+                avatar: "default",
+                time: "4h",
+                content: "Anyone else notice how much money gets spent on 'administration' these days? Seems like there's a lot of overhead for simple projects. Just saying. #JustAsking #TaxpayerMoney",
+                hashtags: ["budget-scandal"],
+                likes: 892,
+                retweets: 567,
+                comments: 234,
+                category: "financial"
+            },
+            {
+                id: 3,
+                username: "truth_matters_99",
+                displayName: "Michael Torres",
+                avatar: "default",
+                time: "5h",
+                content: "The amount of misinformation being spread is ridiculous. People believe anything they read online. Do your own research before jumping to conclusions. #FactCheck #StopRumors",
+                hashtags: ["education-crisis"],
+                likes: 98,
+                retweets: 45,
+                comments: 156,
+                category: "supportive"
+            },
+            {
+                id: 4,
+                username: "teacher_life_2024",
+                displayName: "Carmen Rodriguez",
+                avatar: "default",
+                time: "6h",
+                content: "Another day, another challenge. Sometimes I wonder if the resources are being distributed fairly across all areas. But what do I know? Just trying to do my job. #TeacherLife #EveryDay",
+                hashtags: ["education-crisis"],
+                likes: 423,
+                retweets: 198,
+                comments: 156,
+                category: "community"
+            },
+            {
+                id: 5,
+                username: "construction_guy",
+                displayName: "Mike Thompson",
+                avatar: "default",
+                time: "8h",
+                content: "Working on various projects around town. Interesting how some specs change during construction. Makes you wonder sometimes. But hey, that's not my call to make. #JustDoingMyJob #Construction",
+                hashtags: ["construction-delays"],
+                likes: 678,
+                retweets: 345,
+                comments: 123,
+                category: "construction"
+            },
+            {
+                id: 6,
+                username: "ministry_updates",
+                displayName: "Education Ministry",
+                avatar: "default",
+                time: "10h",
+                content: "Continuing our commitment to serve all communities. Progress takes time, but we remain dedicated to our mission. Weather and administrative processes can cause delays, but we're working diligently. #PublicService #Commitment",
+                hashtags: ["education-crisis"],
+                likes: 67,
+                retweets: 23,
+                comments: 289,
+                category: "official"
+            },
+            {
+                id: 7,
+                username: "mama_maria_2024",
+                displayName: "Maria Gonzalez",
+                avatar: "default",
+                time: "14h",
+                content: "Filed another complaint today. Not sure if anyone actually reads these things. The process is so complicated and takes forever. Will keep trying though. #DontGiveUp #PersistenceIsKey",
+                hashtags: ["missing-classrooms", "education-crisis"],
+                likes: 856,
+                retweets: 432,
+                comments: 189,
+                category: "community"
+            },
+            {
+                id: 8,
+                username: "office_insider",
+                displayName: "Anonymous Source",
+                avatar: "default",
+                time: "15h",
+                content: "You know what's funny? Same vendors keep getting picked for contracts. Small world, I guess. Makes you think about how these decisions get made. #SmallWorld #BusinessAsUsual",
+                hashtags: ["budget-scandal", "construction-delays"],
+                likes: 1234,
+                retweets: 678,
+                comments: 456,
+                category: "financial"
+            },
+            {
+                id: 9,
+                username: "taxpayer_first",
+                displayName: "David Williams",
+                avatar: "default",
+                time: "18h",
+                content: "Went to a meeting yesterday. Lots of presentations about progress and plans. Nice projectors and fancy refreshments. Wonder what all that costs. #MeetingLife #Presentations",
+                hashtags: ["budget-scandal"],
+                likes: 890,
+                retweets: 456,
+                comments: 234,
+                category: "financial"
+            },
+            {
+                id: 10,
+                username: "student_voice_2024",
+                displayName: "Ana Morales",
+                avatar: "default",
+                time: "20h",
+                content: "Some of my classmates have really long commutes. Rain days are the worst - half the class doesn't show up. Transportation is such a challenge around here. #StudentLife #WeatherProblems",
+                hashtags: ["education-crisis"],
+                likes: 645,
+                retweets: 278,
+                comments: 145,
+                category: "community"
+            },
+            {
+                id: 11,
+                username: "political_observer",
+                displayName: "Political Observer",
+                avatar: "default",
+                time: "22h",
+                content: "Interesting timing on all these social media posts. Election season brings out the critics, doesn't it? People love to complain when they're looking for votes. #ElectionSeason #Timing",
+                hashtags: ["education-crisis"],
+                likes: 234,
+                retweets: 89,
+                comments: 567,
+                category: "supportive"
+            },
+            {
+                id: 12,
+                username: "local_reporter",
+                displayName: "James Rivera",
+                avatar: "default",
+                time: "1d",
+                content: "Been looking into some local stories. Lots of paperwork to go through. Sometimes the most interesting stories are in the details that nobody talks about. #LocalNews #PaperTrail",
+                hashtags: ["missing-classrooms"],
+                likes: 567,
+                retweets: 234,
+                comments: 98,
+                category: "community"
+            },
+            {
+                id: 13,
+                username: "village_elder",
+                displayName: "José Martinez",
+                avatar: "default",
+                time: "1d",
+                content: "Still waiting for updates on that project they announced a while back. These things take time, I understand. But it would be nice to hear something. #Waiting #Patience",
+                hashtags: ["missing-classrooms", "education-crisis"],
+                likes: 423,
+                retweets: 167,
+                comments: 89,
+                category: "community"
+            },
+            {
+                id: 14,
+                username: "numbers_person",
+                displayName: "Citizens for Accountability",
+                avatar: "default",
+                time: "2d",
+                content: "Love looking at public spending reports. Numbers are fascinating. Sometimes you notice patterns that make you go 'hmm.' Math doesn't lie, but it doesn't always tell the whole story either. #Numbers #Interesting",
+                hashtags: ["budget-scandal"],
+                likes: 789,
+                retweets: 445,
+                comments: 234,
+                category: "financial"
+            }
+        ];
+        
+        let currentFilter = 'all';
+        
+        function loadShoutPosts() {
+            const postsContainer = document.getElementById('shout-posts');
+            let filteredPosts = shoutPosts;
+            
+            // Filter posts based on current filter
+            if (currentFilter !== 'all') {
+                filteredPosts = shoutPosts.filter(post => 
+                    post.hashtags.includes(currentFilter)
+                );
+            }
+            
+            postsContainer.innerHTML = '';
+            
+            filteredPosts.forEach(post => {
+                const postElement = createPostElement(post);
+                postsContainer.appendChild(postElement);
+            });
+        }
+        
+        function createPostElement(post) {
+            const postDiv = document.createElement('div');
+            postDiv.className = 'shout-post';
+            postDiv.style.cssText = 'border-bottom:1px solid #e1e8ed;padding:16px 20px;';
+            
+            // Get avatar style based on user type
+            const avatarStyle = getAvatarStyle(post.avatar);
+            
+            postDiv.innerHTML = `
+                <div style="display:flex;align-items:flex-start;">
+                    <div style="width:48px;height:48px;${avatarStyle};border-radius:50%;margin-right:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.2rem;">
+                        ${getAvatarIcon(post.avatar)}
+                    </div>
+                    <div style="flex:1;">
+                        <div style="display:flex;align-items:center;margin-bottom:4px;">
+                            <span style="font-weight:600;color:#14171a;margin-right:4px;">${post.displayName}</span>
+                            <span style="color:#657786;font-size:0.9rem;">@${post.username}</span>
+                            <span style="color:#657786;font-size:0.9rem;margin-left:4px;">·</span>
+                            <span style="color:#657786;font-size:0.9rem;margin-left:4px;">${post.time}</span>
+                        </div>
+                        <div style="color:#14171a;font-size:1rem;line-height:1.4;margin-bottom:12px;">
+                            ${post.content}
+                        </div>
+                        <div style="display:flex;justify-content:space-between;max-width:400px;color:#657786;">
+                            <div style="display:flex;align-items:center;padding:8px;border-radius:20px;">
+                                <i class="far fa-comment" style="margin-right:4px;"></i>
+                                <span>${post.comments}</span>
+                            </div>
+                            <div style="display:flex;align-items:center;padding:8px;border-radius:20px;">
+                                <i class="fas fa-retweet" style="margin-right:4px;"></i>
+                                <span>${post.retweets}</span>
+                            </div>
+                            <div style="display:flex;align-items:center;padding:8px;border-radius:20px;">
+                                <i class="far fa-heart" style="margin-right:4px;"></i>
+                                <span>${post.likes}</span>
+                            </div>
+                            <div style="display:flex;align-items:center;padding:8px;border-radius:20px;">
+                                <i class="fas fa-share" style="margin-right:4px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return postDiv;
+        }
+        
+        function getAvatarStyle(avatarType) {
+            // Default Facebook-style silhouette avatar
+            return 'background:#e4e6ea';
+        }
+        
+        function getAvatarIcon(avatarType) {
+            // Default silhouette icon for all users
+            return '<i class="fas fa-user" style="color:#8a8d91;font-size:1.4rem;"></i>';
+        }
+        
+        function filterPosts(filter) {
+            currentFilter = filter;
+            loadShoutPosts();
+            
+            // Update active filter styling
+            document.querySelectorAll('.trending-topics > div').forEach(div => {
+                div.style.backgroundColor = 'transparent';
+                div.style.color = '#14171a';
+            });
+            
+            // Highlight active filter
+            event.target.closest('div').style.backgroundColor = '#f0f9ff';
+            event.target.closest('div').style.color = '#14543a';
+        }
+        
+
     </script>
 </body>
 </html>
