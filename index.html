@@ -889,8 +889,9 @@
                         overlay.style.opacity = '0';
                         
                         setTimeout(() => {
-                            // Set a flag to indicate we're transitioning from loading screen
+                            // Set flags to indicate we're transitioning from loading screen and fullscreen state
                             sessionStorage.setItem('loadingTransition', 'true');
+                            sessionStorage.setItem('shouldEnterFullscreen', isFullscreen() ? 'true' : 'false');
                             window.location.href = 'app.html';
                         }, 800); // Wait for fade-out to complete
                     }, 4000); // Reduced loading time to 4 seconds
