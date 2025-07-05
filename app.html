@@ -413,17 +413,36 @@
         }
         #close-calc-modal {
             position: absolute;
-            right: -18px;
-            top: -18px;
-            background: #fff;
+            right: 12px;
+            top: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 50%;
-            border: 1.5px solid #e0e5ec;
+            border: 1px solid rgba(255,255,255,0.3);
             width: 32px;
             height: 32px;
             font-size: 1.2rem;
-            color: #222;
-            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+            color: #6c757d;
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.15),
+                0 2px 6px rgba(0,0,0,0.08);
             cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #close-calc-modal:hover {
+            transform: scale(1.1);
+            color: #495057;
+            box-shadow: 
+                0 8px 24px rgba(0,0,0,0.2),
+                0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        #close-calc-modal:active {
+            transform: scale(1.05);
         }
         /* Hide Windows desktop background */
         #desktop-bg {
@@ -676,97 +695,313 @@
                 border-radius: 12px;
             }
         }
-        /* Improved centering for welcome modal */
+        /* Enhanced Welcome Modal with Email-like Styling */
         #team-welcome-modal {
             position: fixed !important;
             left: 50% !important;
             top: 50% !important;
             transform: translate(-50%, -50%) !important;
-            z-index: 500 !important;
-            min-width: 340px;
-            max-width: 95vw;
+            z-index: 600 !important;
+            min-width: 420px;
+            max-width: 90vw;
             max-height: 90vh;
-            width: 420px;
-            background: rgba(255,255,255,0.97);
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+            width: 520px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(18px) saturate(1.2);
+            box-shadow: 0 12px 48px 0 rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 22px;
             padding: 0;
             display: none;
-            overflow: visible;
+            overflow: hidden;
+            font-family: 'Segoe UI','Inter',Arial,sans-serif;
         }
+        
         #team-welcome-modal.modal-fade-in {
             display: block;
         }
-        /* Elegant fade-in and scale animation for welcome modal */
+        
+        /* Enhanced fade-in animation */
         .modal-fade-in {
             opacity: 0;
             transform: scale(0.96) translate(-50%, -50%);
-            animation: modalFadeIn 0.55s cubic-bezier(.77,0,.18,1) forwards;
+            animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
+        
         @keyframes modalFadeIn {
-            0% { opacity: 0; transform: scale(0.96) translate(-50%, -50%); }
-            60% { opacity: 1; transform: scale(1.04) translate(-50%, -50%); }
-            100% { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+            0% { 
+                opacity: 0; 
+                transform: scale(0.96) translate(-50%, -50%);
+            }
+            60% { 
+                opacity: 1; 
+                transform: scale(1.02) translate(-50%, -50%);
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) translate(-50%, -50%);
+            }
         }
-        /* Blurred overlay for welcome modal */
+        /* Enhanced overlay for welcome modal */
         #welcome-modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             width: 100vw; height: 100vh;
-            background: rgba(30,34,40,0.18);
-            z-index: 400;
+            background: rgba(30,34,40,0.2);
+            z-index: 500;
             backdrop-filter: blur(8px) saturate(1.2);
             opacity: 0;
-            transition: opacity 0.55s cubic-bezier(.25,.46,.45,.94);
+            transition: opacity 0.4s ease;
         }
+        
         #welcome-modal-overlay.active {
             display: block;
             opacity: 1;
         }
+        
         #welcome-modal-overlay.fade-out {
             opacity: 0;
         }
-        /* Slide navigation styles */
+        /* Enhanced slide navigation styles */
         .welcome-slide {
             opacity: 1;
             transform: translateX(0);
-            transition: all 0.4s cubic-bezier(.25,.46,.45,.94);
-            min-height: 360px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 420px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 48px 36px 24px 36px;
+            padding: 48px 40px 24px 40px;
+            background: linear-gradient(135deg, rgba(248,249,250,0.5) 0%, rgba(255,255,255,0.8) 100%);
+            position: relative;
         }
+        
+        .welcome-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        }
+        
         .welcome-slide.slide-left {
             opacity: 0;
-            transform: translateX(-100%);
+            transform: translateX(-50%) scale(0.95);
         }
+        
         .welcome-slide.slide-right {
             opacity: 0;
-            transform: translateX(100%);
+            transform: translateX(50%) scale(0.95);
         }
-        /* Fade-out and scale-down animation for welcome modal */
+        
+        .welcome-slide h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        
+        .welcome-slide p {
+            color: #2c2c2c;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .welcome-slide strong {
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        .welcome-slide[data-slide="1"] {
+            text-align: center;
+        }
+        
+        .welcome-slide[data-slide="1"] p {
+            text-align: center;
+        }
+        
+        .welcome-slide[data-slide="4"] {
+            text-align: center;
+        }
+        
+        .welcome-slide[data-slide="4"] p {
+            text-align: center;
+        }
+        /* Enhanced navigation buttons */
+        .welcome-nav-buttons {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 10;
+        }
+        
+        .welcome-nav-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-family: inherit;
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.08),
+                0 1px 3px rgba(0,0,0,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+        
+        .welcome-nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 24px rgba(0,0,0,0.12),
+                0 4px 8px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+            color: #495057;
+        }
+        
+        .welcome-nav-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .welcome-nav-btn:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.1),
+                0 1px 3px rgba(0,0,0,0.06),
+                inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+        
+        .welcome-nav-btn.primary {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: #ffffff;
+            border: 1px solid rgba(40,167,69,0.3);
+            box-shadow: 
+                0 4px 16px rgba(40,167,69,0.3),
+                0 2px 8px rgba(40,167,69,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        
+        .welcome-nav-btn.primary:hover {
+            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+            color: #ffffff;
+            box-shadow: 
+                0 8px 32px rgba(40,167,69,0.4),
+                0 4px 16px rgba(40,167,69,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+        
+        .welcome-nav-btn.primary:active {
+            background: linear-gradient(135deg, #1e7e34 0%, #155724 100%);
+        }
+        
+        .welcome-nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.05),
+                0 1px 3px rgba(0,0,0,0.02);
+        }
+        
+        .welcome-nav-btn:disabled:hover {
+            transform: none;
+            box-shadow: 
+                0 2px 8px rgba(0,0,0,0.05),
+                0 1px 3px rgba(0,0,0,0.02);
+        }
+        
+        .welcome-nav-btn.pressed {
+            animation: buttonPress 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes buttonPress {
+            0% { transform: translateY(-2px) scale(1); }
+            50% { transform: translateY(0) scale(0.96); }
+            100% { transform: translateY(-2px) scale(1); }
+        }
+        
+        /* Close button enhancement */
+        #minimize-welcome-modal {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 32px;
+            height: 32px;
+            font-size: 1.2rem;
+            color: #6c757d;
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.15),
+                0 2px 6px rgba(0,0,0,0.08);
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #minimize-welcome-modal:hover {
+            transform: scale(1.1);
+            color: #495057;
+            box-shadow: 
+                0 8px 24px rgba(0,0,0,0.2),
+                0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        #minimize-welcome-modal:active {
+            transform: scale(1.05);
+        }
+        
+        /* Fade-out animation for welcome modal */
         .modal-fade-out {
             opacity: 1;
             transform: scale(1) translate(-50%, -50%);
-            animation: modalFadeOut 0.55s cubic-bezier(.25,.46,.45,.94) forwards;
+            animation: modalFadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
+        
         @keyframes modalFadeOut {
             0% { 
                 opacity: 1; 
-                transform: scale(1) translate(-50%, -50%); 
-                filter: blur(0px);
+                transform: scale(1) translate(-50%, -50%);
             }
             30% { 
                 opacity: 0.8; 
-                transform: scale(0.98) translate(-50%, -50%); 
-                filter: blur(0.5px);
+                transform: scale(0.98) translate(-50%, -50%);
             }
             100% { 
                 opacity: 0; 
-                transform: scale(0.92) translate(-50%, -50%); 
-                filter: blur(2px);
+                transform: scale(0.95) translate(-50%, -50%);
             }
         }
         /* Sidebar section styling for clean, modern look */
@@ -1157,30 +1392,30 @@
     <!-- Calculator modal overlay -->
     <div id="calc-modal-overlay"></div>
 
-    <!-- Team Welcome Modal (updated for slides) -->
-    <div id="team-welcome-modal" class="modal-fade-in" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:500; background:rgba(255,255,255,0.97); box-shadow:0 8px 32px 0 rgba(0,0,0,0.18); border-radius:22px; padding:0; min-width:340px; max-width:98vw; width:480px;">
+    <!-- Team Welcome Modal (enhanced with email-like styling) -->
+    <div id="team-welcome-modal" class="modal-fade-in" style="display:none;">
         <div style="position:relative;">
-            <button id="minimize-welcome-modal" style="position:absolute; right:-18px; top:-18px; background:#fff; border-radius:50%; border:1.5px solid #e0e5ec; width:32px; height:32px; font-size:1.2rem; color:#222; box-shadow:0 2px 8px 0 rgba(0,0,0,0.10); cursor:pointer;">&minus;</button>
+            <button id="minimize-welcome-modal">&times;</button>
             
             <!-- Slide Container -->
             <div id="slides-container" style="position:relative; overflow:hidden; border-radius:22px;">
                 <!-- Slide 1: Welcome -->
-                <div class="welcome-slide active" data-slide="1" style="text-align:center;">
+                <div class="welcome-slide active" data-slide="1">
                     <div>
-                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">Welcome</h2>
-                        <p style="color:#222; font-size:1.15rem; line-height:1.7; margin-bottom:0;">You're about to investigate the mystery of missing classrooms. Explore the whistleblower's data to uncover the truth behind budget discrepancies and construction delays.</p>
+                        <h2>Welcome</h2>
+                        <p>You're about to investigate the mystery of missing classrooms. Explore the whistleblower's data to uncover the truth behind budget discrepancies and construction delays.</p>
                     </div>
                     <div style="height:20px;"></div>
                 </div>
                 
                 <!-- Slide 2: Navigation -->
-                <div class="welcome-slide" data-slide="2" style="text-align:center; display:none;">
+                <div class="welcome-slide" data-slide="2" style="display:none;">
                     <div>
-                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">How to Navigate</h2>
-                        <div style="text-align:left; font-size:1.15rem; color:#222; line-height:1.8; margin-bottom:0;">
-                            <p style="margin-bottom:18px;"><strong>Desktop:</strong> Click the USB folder icon to access data files</p>
-                            <p style="margin-bottom:18px;"><strong>Calculator:</strong> Use for quick calculations during analysis</p>
-                            <p style="margin-bottom:18px;"><strong>Home:</strong> Return to desktop from any view</p>
+                        <h2>How to Navigate</h2>
+                        <div style="text-align:left; margin-bottom:0;">
+                            <p><strong>Desktop:</strong> Click the USB folder icon to access data files</p>
+                            <p><strong>Calculator:</strong> Use for quick calculations during analysis</p>
+                            <p><strong>Home:</strong> Return to desktop from any view</p>
                             <p style="margin-bottom:0;"><strong>Help:</strong> Access this tutorial anytime</p>
                         </div>
                     </div>
@@ -1188,13 +1423,13 @@
                 </div>
                 
                 <!-- Slide 3: Investigation Tasks -->
-                <div class="welcome-slide" data-slide="3" style="text-align:center; display:none;">
+                <div class="welcome-slide" data-slide="3" style="display:none;">
                     <div>
-                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">Your Investigation</h2>
-                        <div style="text-align:left; font-size:1.15rem; color:#222; line-height:1.8; margin-bottom:0;">
-                            <p style="margin-bottom:18px;"><strong>Analyze:</strong> Review budget documents and construction reports</p>
-                            <p style="margin-bottom:18px;"><strong>Compare:</strong> Look for discrepancies between planned vs. actual</p>
-                            <p style="margin-bottom:18px;"><strong>Investigate:</strong> Track the missing classrooms through data</p>
+                        <h2>Your Investigation</h2>
+                        <div style="text-align:left; margin-bottom:0;">
+                            <p><strong>Analyze:</strong> Review budget documents and construction reports</p>
+                            <p><strong>Compare:</strong> Look for discrepancies between planned vs. actual</p>
+                            <p><strong>Investigate:</strong> Track the missing classrooms through data</p>
                             <p style="margin-bottom:0;"><strong>Document:</strong> Note your findings and evidence</p>
                         </div>
                     </div>
@@ -1202,20 +1437,20 @@
                 </div>
                 
                 <!-- Slide 4: Getting Started -->
-                <div class="welcome-slide" data-slide="4" style="text-align:center; display:none;">
+                <div class="welcome-slide" data-slide="4" style="display:none;">
                     <div>
-                        <h2 style="font-size:1.8rem; font-weight:700; color:#14543a; margin-bottom:28px;">Ready to Begin?</h2>
-                        <p style="color:#222; font-size:1.15rem; line-height:1.7; margin-bottom:24px;">Click the <strong>USB folder</strong> on the desktop to start exploring the data. Work systematically through the documents to build your case.</p>
-                        <p style="color:#666; font-size:1.1rem; margin-bottom:0;">Remember: You can always return to this tutorial by clicking <strong>Help</strong> in the menu bar.</p>
+                        <h2>Ready to Begin?</h2>
+                        <p>Click the <strong>USB folder</strong> on the desktop to start exploring the data. Work systematically through the documents to build your case.</p>
+                        <p style="color:#666; font-size:1rem; margin-bottom:0;">Remember: You can always return to this tutorial by clicking <strong>Help</strong> in the menu bar.</p>
                     </div>
                     <div style="height:20px;"></div>
                 </div>
             </div>
             
             <!-- Navigation Controls -->
-            <div style="position:absolute; bottom:24px; left:50%; transform:translateX(-50%); display:flex; gap:16px;">
-                <button id="prev-slide" style="background:#f5f6fa; border:1.5px solid #e0e5ec; border-radius:10px; padding:12px 20px; font-size:1rem; color:#666; cursor:pointer; transition:all 0.15s; font-weight:500;" disabled>Previous</button>
-                <button id="next-slide" style="background:#14543a; border:1.5px solid #14543a; border-radius:10px; padding:12px 20px; font-size:1rem; color:#fff; cursor:pointer; transition:all 0.15s; font-weight:500;">Next</button>
+            <div class="welcome-nav-buttons">
+                <button id="prev-slide" class="welcome-nav-btn" disabled>Previous</button>
+                <button id="next-slide" class="welcome-nav-btn primary">Next</button>
             </div>
         </div>
     </div>
@@ -1335,19 +1570,20 @@
             
             if (prevBtn) {
                 prevBtn.disabled = slideNum === 1;
-                prevBtn.style.opacity = slideNum === 1 ? '0.5' : '1';
-                prevBtn.style.cursor = slideNum === 1 ? 'not-allowed' : 'pointer';
+                if (slideNum === 1) {
+                    prevBtn.classList.add('disabled');
+                } else {
+                    prevBtn.classList.remove('disabled');
+                }
             }
             
             if (nextBtn) {
                 if (slideNum === totalSlides) {
                     nextBtn.textContent = 'Get Started';
-                    nextBtn.style.background = '#14543a';
-                    nextBtn.style.borderColor = '#14543a';
+                    nextBtn.classList.add('primary');
                 } else {
                     nextBtn.textContent = 'Next';
-                    nextBtn.style.background = '#14543a';
-                    nextBtn.style.borderColor = '#14543a';
+                    nextBtn.classList.add('primary');
                 }
             }
         }
@@ -1406,7 +1642,7 @@
                         overlay.classList.remove('active', 'fade-out');
                         overlay.style.display = 'none';
                     }
-                }, 550); // match animation duration
+                }, 400); // match enhanced animation duration
             } else {
                 if (overlay) {
                     overlay.classList.remove('active');
@@ -2119,9 +2355,17 @@
                 console.log('Help menu clicked, showing welcome modal');
             };
             
-            // Slide navigation event listeners
-            document.getElementById('next-slide').onclick = nextSlide;
-            document.getElementById('prev-slide').onclick = prevSlide;
+            // Slide navigation event listeners with button press animation
+            document.getElementById('next-slide').onclick = function() {
+                this.classList.add('pressed');
+                setTimeout(() => this.classList.remove('pressed'), 150);
+                nextSlide();
+            };
+            document.getElementById('prev-slide').onclick = function() {
+                this.classList.add('pressed');
+                setTimeout(() => this.classList.remove('pressed'), 150);
+                prevSlide();
+            };
             
             // Whistleblower email modal event listeners
             document.getElementById('close-whistleblower-modal').onclick = hideWhistleblowerEmail;
@@ -2151,6 +2395,7 @@
             document.getElementById('calc-modal-overlay').addEventListener('click', hideMacCalculator);
             document.getElementById('explorer-modal-overlay').addEventListener('click', hideFileExplorer);
             document.getElementById('whistleblower-modal-overlay').addEventListener('click', hideWhistleblowerEmail);
+            document.getElementById('welcome-modal-overlay').addEventListener('click', hideTeamWelcomeModal);
 
             // Fullscreen event listeners
             document.getElementById('fullscreen-toggle').addEventListener('click', toggleFullscreen);
