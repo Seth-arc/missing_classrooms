@@ -1,6 +1,8 @@
 <div align="center">
   <img src="img/missing_classrooms.png" alt="The Missing Classrooms - Investigation Interface" width="800">
-  **A Learning Activity for Data Journalism**
+</div>
+<div align="center">
+  <p>**A Learning Activity for Data Journalism**</p>
 </div>
 
 ## Overview
