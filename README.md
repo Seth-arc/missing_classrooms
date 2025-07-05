@@ -1,8 +1,7 @@
 <div align="center">
   <img src="img/missing_classrooms.png" alt="The Missing Classrooms - Investigation Interface" width="800">
+  **A Learning Activity for Data Journalism**
 </div>
-
-**A Learning Activity for Data Journalism**
 
 ## Overview
 
@@ -84,7 +83,6 @@ Enter one of these codes when prompted to begin your investigation:
 | **Financial Crimes Investigation** | `finance` | Budget analysis and spending patterns |
 | **Geographic Justice** | `geography` | Regional disparities and resource allocation |
 | **Procurement Investigation** | `procure` | Contractor relationships and bidding processes |
-| **Developer Access** | `sethu` | Full access for testing and development |
 
 ---
 
