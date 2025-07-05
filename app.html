@@ -125,6 +125,19 @@
             color: #02B290;
         }
         
+        /* Fullscreen toggle button styling */
+        #fullscreen-toggle {
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+        }
+        
+        #fullscreen-toggle:hover {
+            color: #02B290 !important;
+            background: rgba(2, 178, 144, 0.1);
+            transform: scale(1.1);
+        }
+        
         /* Email icon hover effect */
         #email-icon:hover {
             color: #02B290 !important;
@@ -904,6 +917,9 @@
             <span class="menu-label" id="menu-home">Home</span>
             <span class="menu-label" id="menu-help">Help</span>
         </div>
+        <div style="display: flex; align-items: center;">
+            <i class="fas fa-expand" id="fullscreen-toggle" style="font-size: 1rem; color: #666; cursor: pointer; transition: color 0.15s;" title="Toggle Fullscreen (F11)"></i>
+        </div>
     </div>
     <!-- Mac Desktop Background -->
     <div class="mac-desktop-bg"></div>
@@ -1483,8 +1499,119 @@
             icon.onmousedown = (e) => { if (e.button === 0) icon.style.cursor = 'grabbing'; };
             icon.onmouseup = () => { icon.style.cursor = 'grab'; };
         }
+        // Fullscreen functionality
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log('Fullscreen request failed:', err);
+                });
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            }
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            }
+        }
+
+        function isFullscreen() {
+            return !!(document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.msFullscreenElement || 
+                     document.mozFullScreenElement);
+        }
+
+        function toggleFullscreen() {
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        function updateFullscreenIcon() {
+            const icon = document.getElementById('fullscreen-toggle');
+            if (icon) {
+                if (isFullscreen()) {
+                    icon.className = 'fas fa-compress';
+                    icon.title = 'Exit Fullscreen (ESC)';
+                } else {
+                    icon.className = 'fas fa-expand';
+                    icon.title = 'Enter Fullscreen (F11)';
+                }
+            }
+        }
+
+        // Listen for fullscreen changes
+        function handleFullscreenChange() {
+            updateFullscreenIcon();
+            
+            // Show subtle notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                z-index: 10001;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            `;
+            notification.textContent = isFullscreen() ? 
+                'Entered fullscreen mode (Press ESC to exit)' : 
+                'Exited fullscreen mode';
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+            }, 10);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 2000);
+        }
+
         // On DOMContentLoaded, handle team selection and welcome modal
         window.addEventListener('DOMContentLoaded', function() {
+            // Enter fullscreen on first user interaction if not already in fullscreen
+            let hasInteracted = false;
+            const handleFirstInteraction = () => {
+                if (!hasInteracted && !isFullscreen()) {
+                    hasInteracted = true;
+                    enterFullscreen();
+                }
+            };
+            
+            // Add event listeners for first interaction
+            ['click', 'keydown', 'touchstart'].forEach(eventType => {
+                document.addEventListener(eventType, handleFirstInteraction, { once: true });
+            });
+            
             // Check if we're transitioning from loading screen for coordinated animation
             const isLoadingTransition = sessionStorage.getItem('loadingTransition');
             
@@ -1503,6 +1630,50 @@
             setTimeout(function() {
                     showTeamWelcomeModal();
                 }, 800); // Wait for normal page fade-in
+                
+                // Show fullscreen hint for direct visits
+                setTimeout(function() {
+                    if (!isFullscreen()) {
+                        const hint = document.createElement('div');
+                        hint.style.cssText = `
+                            position: fixed;
+                            top: 50px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(20, 84, 58, 0.95);
+                            color: white;
+                            padding: 12px 20px;
+                            border-radius: 8px;
+                            font-size: 0.9rem;
+                            z-index: 10001;
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                            cursor: pointer;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                        `;
+                        hint.innerHTML = '<i class="fas fa-expand" style="margin-right: 8px;"></i>Click anywhere to enter fullscreen for the best experience';
+                        
+                        document.body.appendChild(hint);
+                        
+                        // Animate in
+                        setTimeout(() => {
+                            hint.style.opacity = '1';
+                        }, 10);
+                        
+                        // Remove on click or after delay
+                        const removeHint = () => {
+                            hint.style.opacity = '0';
+                            setTimeout(() => {
+                                if (document.body.contains(hint)) {
+                                    document.body.removeChild(hint);
+                                }
+                            }, 300);
+                        };
+                        
+                        hint.addEventListener('click', removeHint);
+                        setTimeout(removeHint, 5000);
+                    }
+                }, 2000);
             }
             
             // Initialize UI elements immediately
@@ -1572,6 +1743,27 @@
                     emailIcon.style.transform = 'scale(1)';
                 }
             }
+
+            // Fullscreen event listeners
+            document.getElementById('fullscreen-toggle').addEventListener('click', toggleFullscreen);
+            
+            // Keyboard shortcuts for fullscreen
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F11') {
+                    e.preventDefault();
+                    toggleFullscreen();
+                } else if (e.key === 'Escape' && isFullscreen()) {
+                    // Don't prevent default for ESC - let browser handle it naturally
+                }
+            });
+            
+            // Listen for fullscreen changes (from any source)
+            ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(event => {
+                document.addEventListener(event, handleFullscreenChange);
+            });
+            
+            // Update icon on initial load
+            updateFullscreenIcon();
         });
 
         // Load and display the explorer with investigation data

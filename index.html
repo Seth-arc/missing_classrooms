@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Missing Classrooms</title>
     <link rel="icon" type="image/png" href="img/AidData_icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="6940c756-cd1e-403c-8de3-550f2a857c83"></script>
     <style>
         * {
@@ -696,7 +697,11 @@
         <p class="arabic-subtitle fade-in">گمشدہ کلاس رومز</p>
         <div class="divider fade-in"></div>
         <p class="activity-subtitle fade-in">A Data Journalism Learning Experience</p>
-        <button class="begin-button scale-fade-in" id="beginButton">Begin</button>
+        <button class="begin-button scale-fade-in" id="beginButton">Begin Investigation</button>
+        <p style="color: #b3d6f6; font-size: 0.9rem; margin-top: 16px; opacity: 0.8; animation: fadeIn 2s ease-in-out 2s both;">
+            <i class="fas fa-expand" style="margin-right: 6px;"></i>
+            Click to enter immersive fullscreen experience
+        </p>
         
         <!-- Team Code Modal -->
         <div id="teamCodeModal" class="modal-overlay" style="display: none;">
@@ -760,6 +765,42 @@
             // No team cards or proceed button to animate
         });
 
+        // Fullscreen functionality
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log('Fullscreen request failed:', err);
+                });
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            }
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            }
+        }
+
+        function isFullscreen() {
+            return !!(document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.msFullscreenElement || 
+                     document.mozFullScreenElement);
+        }
+
         // Team code validation and modal handling
         document.addEventListener('DOMContentLoaded', () => {
             const beginButton = document.getElementById('beginButton');
@@ -783,6 +824,11 @@
             // Show team code modal when Begin button is clicked
             if (beginButton) {
                 beginButton.addEventListener('click', () => {
+                    // Enter fullscreen on first interaction
+                    if (!isFullscreen()) {
+                        enterFullscreen();
+                    }
+                    
                     teamCodeModal.style.display = 'flex';
                     teamCodeInput.focus();
                 });
