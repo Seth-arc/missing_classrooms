@@ -388,15 +388,28 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%,-50%);
-            z-index: 300;
-            background: rgba(255,255,255,0.85);
+            z-index: 600;
+            background: rgba(255,255,255,0.98);
             backdrop-filter: blur(18px) saturate(1.5);
             border-radius: 22px;
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.13);
+            box-shadow: 0 12px 48px 0 rgba(0,0,0,0.25);
             padding: 0;
             max-width: 90vw;
             max-height: 90vh;
             overflow: visible;
+        }
+        
+        /* Calculator modal overlay */
+        #calc-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(30,34,40,0.2);
+            z-index: 500;
+            backdrop-filter: blur(8px) saturate(1.2);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         #close-calc-modal {
             position: absolute;
@@ -994,6 +1007,9 @@
             <div id="desktop-calc-app"></div>
         </div>
     </div>
+    
+    <!-- Calculator modal overlay -->
+    <div id="calc-modal-overlay"></div>
 
     <!-- Team Welcome Modal (updated for slides) -->
     <div id="team-welcome-modal" class="modal-fade-in" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:500; background:rgba(255,255,255,0.97); box-shadow:0 8px 32px 0 rgba(0,0,0,0.18); border-radius:22px; padding:0; min-width:340px; max-width:98vw; width:480px;">
@@ -1128,7 +1144,7 @@
     <!-- Blurred overlay for whistleblower modal -->
     <div id="whistleblower-modal-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100vw; height:100vh; background:rgba(30,34,40,0.2); z-index:500; backdrop-filter:blur(8px) saturate(1.2); opacity:0; transition:opacity 0.4s ease;"></div>
     <!-- Main Explorer Layout (unchanged) -->
-    <div class="explorer-window" id="explorer-window" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:300; background:#fff; border:none; border-radius:0; box-shadow:none; overflow:hidden; box-sizing:border-box;">
+    <div class="explorer-window" id="explorer-window" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:600; background:#fff; border:none; border-radius:0; box-shadow:none; overflow:hidden; box-sizing:border-box;">
       <div style="display:flex; align-items:center; justify-content:space-between; background:linear-gradient(90deg,#f5f6fa 60%,#e0e5ec 100%); border-bottom:1.5px solid #e0e5ec; padding:10px 18px; height:54px;">
         <span style="font-size:1.15rem; font-weight:600; color:#14543a;"><i class='fas fa-folder-open' style='margin-right:8px;'></i>USB Explorer</span>
         <button id="close-explorer-window" style="background:#fff; border-radius:50%; border:1.5px solid #e0e5ec; width:32px; height:32px; font-size:1.3rem; color:#222; box-shadow:0 2px 8px 0 rgba(0,0,0,0.10); cursor:pointer; position:absolute; right:24px; top:11px;">&times;</button>
@@ -1140,9 +1156,12 @@
             <div id="navigation-list" class="sidebar-list" style="padding-left:18px;"></div>
         </aside>
         <!-- Data Display Area -->
-        <section class="explorer-content" id="data-display" style="flex:1; padding:60px 40px; overflow:auto; height:100%; min-height:0; box-sizing:border-box; background:#fafafa;"></section>
+        <section class="explorer-content" id="data-display" style="flex:1; padding:60px 40px; overflow:auto; height:100%; min-height:0; box-sizing:border-box; background:#fafafa;">        </section>
       </div>
     </div>
+    
+    <!-- USB Explorer modal overlay -->
+    <div id="explorer-modal-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100vw; height:100vh; background:rgba(30,34,40,0.2); z-index:500; backdrop-filter:blur(8px) saturate(1.2); opacity:0; transition:opacity 0.4s ease;"></div>
     <script>
         // Slide navigation functionality
         let currentSlide = 1;
@@ -1432,35 +1451,167 @@
             document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = '');
             document.querySelectorAll('.mac-dock').forEach(el => el.style.display = '');
             document.getElementById('desktop-calc-modal').style.display = 'none';
+            document.getElementById('calc-modal-overlay').style.display = 'none';
         }
+        
         function showMacCalculator() {
-            document.getElementById('desktop-calc-app').innerHTML = renderCalculatorApp();
-            document.getElementById('desktop-calc-modal').style.display = 'block';
+            const modal = document.getElementById('desktop-calc-modal');
+            const overlay = document.getElementById('calc-modal-overlay');
+            
+            if (modal && overlay) {
+                // Show overlay first
+                overlay.style.display = 'block';
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                }, 10);
+                
+                // Show modal with fade-in effect
+                modal.style.display = 'block';
+                modal.style.opacity = '0';
+                modal.style.transform = 'translate(-50%, -50%) scale(0.95)';
+                
+                setTimeout(() => {
+                    modal.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    modal.style.opacity = '1';
+                    modal.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 50);
+                
+                // Render calculator content
+                document.getElementById('desktop-calc-app').innerHTML = renderCalculatorApp();
+            }
         }
+        
         function hideMacCalculator() {
-            document.getElementById('desktop-calc-modal').style.display = 'none';
+            const modal = document.getElementById('desktop-calc-modal');
+            const overlay = document.getElementById('calc-modal-overlay');
+            
+            // Try to get the calculator icon (prefer dock icon if visible, otherwise use desktop icon)
+            let calcIcon = document.getElementById('mac-dock-calc');
+            const isDockVisible = calcIcon && calcIcon.offsetParent !== null;
+            
+            if (!isDockVisible) {
+                calcIcon = document.getElementById('mac-desktop-calc-icon');
+            }
+            
+            if (modal && overlay && calcIcon) {
+                // Get the calc icon position for animation target
+                const iconRect = calcIcon.getBoundingClientRect();
+                const iconX = iconRect.left + (iconRect.width / 2);
+                const iconY = iconRect.top + (iconRect.height / 2);
+                
+                // Calculate the translation needed to move modal to icon position
+                const modalRect = modal.getBoundingClientRect();
+                const modalCenterX = modalRect.left + (modalRect.width / 2);
+                const modalCenterY = modalRect.top + (modalRect.height / 2);
+                
+                const translateX = iconX - modalCenterX;
+                const translateY = iconY - modalCenterY;
+                
+                // Animate modal minimizing to icon position
+                modal.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                modal.style.opacity = '0';
+                modal.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) scale(0.05)`;
+                
+                // Fade out overlay
+                overlay.style.opacity = '0';
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    overlay.style.display = 'none';
+                    modal.style.transition = '';
+                }, 500);
+            }
         }
         // Show the file explorer and hide Mac desktop
         function showFileExplorer() {
-            document.querySelector('.mac-menu-bar').style.display = '';
-            const macBg = document.querySelector('.mac-desktop-bg');
-            macBg.style.background = `url('img/wallpaper.jpg') center center/cover no-repeat`;
-            macBg.style.display = 'none';
-            document.getElementById('explorer-window').style.display = '';
-            document.getElementById('desktop-calc-modal').style.display = 'none';
-            document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.mac-dock').forEach(el => el.style.display = 'none');
+            const explorer = document.getElementById('explorer-window');
+            const overlay = document.getElementById('explorer-modal-overlay');
             
-            // Initialize investigation data and collapse all folders
-            setupExplorerForTeam();
-            
-            // Check if this is the first time opening the USB folder
-            const hasSeenWhistleblowerEmail = localStorage.getItem('whistleblowerEmailSeen');
-            if (!hasSeenWhistleblowerEmail) {
-                // Show whistleblower email after a short delay to let the explorer load
+            if (explorer && overlay) {
+                // Hide Mac desktop elements
+                document.querySelector('.mac-menu-bar').style.display = '';
+                const macBg = document.querySelector('.mac-desktop-bg');
+                macBg.style.background = `url('img/wallpaper.jpg') center center/cover no-repeat`;
+                macBg.style.display = 'none';
+                document.getElementById('desktop-calc-modal').style.display = 'none';
+                document.getElementById('calc-modal-overlay').style.display = 'none';
+                document.querySelectorAll('.mac-desktop-icon').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.mac-dock').forEach(el => el.style.display = 'none');
+                
+                // Show overlay first
+                overlay.style.display = 'block';
                 setTimeout(() => {
-                    showWhistleblowerEmail();
-                }, 800);
+                    overlay.style.opacity = '1';
+                }, 10);
+                
+                // Show explorer with fade-in effect
+                explorer.style.display = 'block';
+                explorer.style.opacity = '0';
+                explorer.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    explorer.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    explorer.style.opacity = '1';
+                    explorer.style.transform = 'scale(1)';
+                }, 50);
+                
+                // Initialize investigation data and collapse all folders
+                setupExplorerForTeam();
+                
+                // Check if this is the first time opening the USB folder
+                const hasSeenWhistleblowerEmail = localStorage.getItem('whistleblowerEmailSeen');
+                if (!hasSeenWhistleblowerEmail) {
+                    // Show whistleblower email after a short delay to let the explorer load
+                    setTimeout(() => {
+                        showWhistleblowerEmail();
+                    }, 800);
+                }
+            }
+        }
+        
+        function hideFileExplorer() {
+            const explorer = document.getElementById('explorer-window');
+            const overlay = document.getElementById('explorer-modal-overlay');
+            
+            // Try to get the USB icon (prefer dock icon if visible, otherwise use desktop icon)
+            let usbIcon = document.getElementById('mac-dock-usb');
+            const isDockVisible = usbIcon && usbIcon.offsetParent !== null;
+            
+            if (!isDockVisible) {
+                usbIcon = document.getElementById('mac-desktop-usb-icon');
+            }
+            
+            if (explorer && overlay && usbIcon) {
+                // Get the USB icon position for animation target
+                const iconRect = usbIcon.getBoundingClientRect();
+                const iconX = iconRect.left + (iconRect.width / 2);
+                const iconY = iconRect.top + (iconRect.height / 2);
+                
+                // Calculate the translation needed to move explorer to icon position
+                const explorerRect = explorer.getBoundingClientRect();
+                const explorerCenterX = explorerRect.left + (explorerRect.width / 2);
+                const explorerCenterY = explorerRect.top + (explorerRect.height / 2);
+                
+                const translateX = iconX - explorerCenterX;
+                const translateY = iconY - explorerCenterY;
+                
+                // Animate explorer minimizing to icon position
+                explorer.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                explorer.style.opacity = '0';
+                explorer.style.transform = `translate(${translateX}px, ${translateY}px) scale(0.05)`;
+                
+                // Fade out overlay
+                overlay.style.opacity = '0';
+                
+                setTimeout(() => {
+                    explorer.style.display = 'none';
+                    overlay.style.display = 'none';
+                    explorer.style.transition = '';
+                    explorer.style.transform = '';
+                    
+                    // Show Mac desktop
+                    showMacDesktop();
+                }, 500);
             }
         }
         
@@ -1785,17 +1936,37 @@
                     emailIcon.style.transform = 'scale(1)';
                 }
             }
+            
+            // Add overlay click handlers to close modals
+            document.getElementById('calc-modal-overlay').addEventListener('click', hideMacCalculator);
+            document.getElementById('explorer-modal-overlay').addEventListener('click', hideFileExplorer);
+            document.getElementById('whistleblower-modal-overlay').addEventListener('click', hideWhistleblowerEmail);
 
             // Fullscreen event listeners
             document.getElementById('fullscreen-toggle').addEventListener('click', toggleFullscreen);
             
-            // Keyboard shortcuts for fullscreen
+            // Keyboard shortcuts for fullscreen and modal closing
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'F11') {
                     e.preventDefault();
                     toggleFullscreen();
-                } else if (e.key === 'Escape' && isFullscreen()) {
-                    // Don't prevent default for ESC - let browser handle it naturally
+                } else if (e.key === 'Escape') {
+                    // Close modals with escape key
+                    const calcModal = document.getElementById('desktop-calc-modal');
+                    const explorerModal = document.getElementById('explorer-window');
+                    const emailModal = document.getElementById('whistleblower-email-modal');
+                    
+                    if (calcModal && calcModal.style.display === 'block') {
+                        e.preventDefault();
+                        hideMacCalculator();
+                    } else if (explorerModal && explorerModal.style.display === 'block') {
+                        e.preventDefault();
+                        hideFileExplorer();
+                    } else if (emailModal && emailModal.style.display === 'block') {
+                        e.preventDefault();
+                        hideWhistleblowerEmail();
+                    }
+                    // If none of the modals are open and we're in fullscreen, let browser handle ESC naturally
                 }
             });
             
@@ -2344,7 +2515,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             setupExplorerForTeam();
             document.getElementById('close-explorer-window').onclick = function() {
-                showMacDesktop();
+                hideFileExplorer();
             };
         });
         // Initialize explorer without team selection
