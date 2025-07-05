@@ -11,11 +11,11 @@
 
 ### Learning Objectives
 
-- **Data Analysis Skills**: Learn to interpret complex datasets and identify anomalies
-- **Critical Thinking**: Develop the ability to spot inconsistencies in financial and operational data
-- **Investigative Methodology**: Practice systematic approaches to data-driven journalism
-- **Cross-Reference Analysis**: Understand how different data sources can reveal larger patterns
-- **Evidence Documentation**: Learn to build compelling narratives from quantitative evidence
+- Learn to interpret complex datasets and identify anomalies
+- Develop the ability to spot inconsistencies in financial and operational data
+- Practice systematic approaches to data-driven journalism
+- Understand how different data sources can reveal larger patterns
+- Learn to build compelling narratives from quantitative evidence
 
 ---
 
@@ -115,11 +115,10 @@ missing_classrooms/
 
 ### Interactive Elements
 
-- **🖥️ Mac-Style Interface**: Familiar desktop environment
-- **📧 Email System**: Whistleblower communications with attachments
-- **📊 Data Explorer**: File browser for investigation documents
-- **🧮 Built-in Calculator**: For quick data analysis
-- **📱 Responsive Design**: Works on desktop and mobile devices
+- **Mac-Style Interface**: Familiar desktop environment
+- **Email System**: Whistleblower communications with attachments
+- **Data Explorer**: File browser for investigation documents
+- **Built-in Calculator**: For quick data analysis
 
 ### Educational Components
 
@@ -224,9 +223,8 @@ This project is designed for educational use. Please respect the learning object
 
 ## Credits
 
-**Developed by**: AidData
-**Learning Experience Designer**: Sethu Nguna (AidData Training and Instructional Design Manager)  
-**Developer and Facilitator**: Sethu Nguna  
+**Developed by**: AidData, a Research Lab at William & Mary
+**Learning Experience Designer and Facilitator**: Sethu Nguna (AidData, Training and Instructional Design Manager)  
 **Educational Partner**: CEJ (Center for Excellence in Journalism)  
 **Year**: 2025
 
