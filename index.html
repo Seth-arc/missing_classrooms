@@ -14,6 +14,62 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* Mobile device restriction overlay */
+        .mobile-restriction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .mobile-restriction-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-restriction-content h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #f5f6fa;
+        }
+
+        .mobile-restriction-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .mobile-restriction-content .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 767px) {
+            .mobile-restriction-overlay {
+                display: flex !important;
+            }
+            
+            body {
+                overflow: hidden;
+            }
+        }
+
         body {
             background:
                 linear-gradient(135deg, #181c20 0%, #232a32 100%);
@@ -617,6 +673,17 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Device Restriction Overlay -->
+    <div class="mobile-restriction-overlay" id="mobileRestrictionOverlay">
+        <div class="mobile-restriction-content">
+            <div class="icon">💻</div>
+            <h1>Desktop Required</h1>
+            <p>This interactive investigation experience is designed for desktop and tablet devices.</p>
+            <p>Please access this activity on a device with a larger screen for the best experience.</p>
+            <p><strong>Minimum screen width:</strong> 768px</p>
+        </div>
+    </div>
+
     <header class="header fade-slide-down">
         <img src="img/CEJ_AidData.png" alt="CEJ & AidData Logo" class="header-logo">
         <div class="logo-left">
@@ -783,6 +850,32 @@
                     }, 4000); // Reduced loading time to 4 seconds
                 }, 700);
             }
+        });
+
+        // Mobile device detection and restriction
+        function checkScreenSize() {
+            const overlay = document.getElementById('mobileRestrictionOverlay');
+            const isSmallScreen = window.innerWidth < 768;
+            
+            if (isSmallScreen) {
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Check on page load
+        document.addEventListener('DOMContentLoaded', checkScreenSize);
+        
+        // Check on window resize
+        window.addEventListener('resize', checkScreenSize);
+        
+        // Check on orientation change (mobile devices)
+        window.addEventListener('orientationchange', function() {
+            // Small delay to account for orientation change
+            setTimeout(checkScreenSize, 100);
         });
     </script>
 </body>
